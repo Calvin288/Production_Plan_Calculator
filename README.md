@@ -1,4 +1,4 @@
-# Nidhi-Lab5
+
 | Team Number                 | 7                         |                     |                       |                            |                             |
 |-----------------------------|---------------------------|---------------------|-----------------------|----------------------------|-----------------------------|
 |      Student Name           |      Student Email        |      Student ID     |      GitHub ID        |      Function Assigned     |      Is Team Leader (Y)     |
