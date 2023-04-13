@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3554c03f-a0db-4c05-a895-ed6b8f90923d" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/src/main/java/AppMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/src/main/java/comp3111pcc1Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/src/main/java/functionAController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppc1.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ppc1_function_A.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/ppc1.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/ppc1_function_A.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/src/main/java/AppMain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/src/main/java/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/src/main/java/comp3111pcc1Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/src/main/java/functionAController$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/src/main/java/functionAController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Team7_Project_COMP3111.iml" beforeDir="false" />
-    </list>
+    <list default="true" id="3554c03f-a0db-4c05-a895-ed6b8f90923d" name="Changes" comment="test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="functionA" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -102,17 +79,17 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
                   <option value="main" />
                 </option>
               </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/functionA" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/main" />
                 </option>
               </RecentGroup>
             </list>
