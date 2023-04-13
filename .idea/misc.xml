@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -16,5 +17,9 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="jpab" />
+=======
+  <component name="ProjectRootManager" version="2" default="true">
+    <output url="file://$PROJECT_DIR$/classes" />
+>>>>>>> Stashed changes
   </component>
 </project>
