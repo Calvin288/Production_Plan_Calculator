@@ -59,7 +59,7 @@
       </MenuBar>
       <AnchorPane fx:id="label_col_heading2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="519.0" prefWidth="788.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="Num_Week" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="WeekOfYear" />
+            <TextField fx:id="Num_Week" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Num_Week" />
             <Label fx:id="data_input_heading1" layoutX="143.0" layoutY="59.0" text="DATA INPUT" />
             <Label fx:id="data_input_caption2a" layoutX="133.0" layoutY="147.0" text="Labor (minutes)" />
             <Label fx:id="form_heading1" layoutX="230.0" layoutY="8.0" text="A2.2.C Weekly Review by Revenue &amp; Backorders">
@@ -90,7 +90,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="or_Prod_Vol_Rose" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="140.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
+            <TextField fx:id="Opt_Rose" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="140.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -104,7 +104,7 @@
             <Label fx:id="opt_r_caption1" layoutX="487.0" layoutY="107.0" text="Production Volume (Litre)" />
             <Label fx:id="opt_r_caption1a" layoutX="575.0" layoutY="142.0" text="Rose:" />
             <Label fx:id="opt_r_caption1b" layoutX="575.0" layoutY="171.0" text="P-Noir:" />
-            <TextField fx:id="or_Prod_Vol_Noir" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="167.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
+            <TextField fx:id="Opt_Noir" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="167.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -113,7 +113,7 @@
                </effect>
             </TextField>
             <Label fx:id="opt_r_caption1c" layoutX="575.0" layoutY="204.0" text="Total:" />
-            <TextField fx:id="or_Prod_Vol_Total" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="200.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
+            <TextField fx:id="Opt_Total" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="200.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -124,7 +124,7 @@
             <Line fx:id="HLine4" endX="100.0" layoutX="636.0" layoutY="196.0" startX="-61.0" />
             <Label fx:id="opt_r_caption2" layoutX="484.0" layoutY="246.0" text="Total Revenue (A$):" />
             <Label fx:id="opt_r_caption3" layoutX="486.0" layoutY="273.0" text="Backorder Fulfilment" />
-            <TextField fx:id="or_Revenue" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="241.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
+            <TextField fx:id="Opt_Revenue" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="241.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -132,7 +132,7 @@
                   <ColorAdjust />
                </effect>
             </TextField>
-            <TextField fx:id="or_Bk_Fulfill" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="269.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="Yes" style="-fx-background-color: grey;">
+            <TextField fx:id="Bko_Fulfill" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="269.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="Yes" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

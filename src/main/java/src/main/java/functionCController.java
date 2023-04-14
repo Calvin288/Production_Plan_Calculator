@@ -1,11 +1,12 @@
 package src.main.java;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -13,16 +14,16 @@ import javafx.scene.shape.Line;
 public class functionCController {
 
     @FXML
-    private TextField Bko_Noir;
+    private TextField Bko_Noir; //integer
 
     @FXML
-    private TextField Bko_Rose;
+    private TextField Bko_Rose; //integer
 
     @FXML
-    private TextField Cap_Grape;
+    private TextField Cap_Grape; //integer
 
     @FXML
-    private TextField Cap_Labor;
+    private TextField Cap_Labor; //integer
 
     @FXML
     private Line HLine2;
@@ -37,13 +38,13 @@ public class functionCController {
     private Line HLine_1;
 
     @FXML
-    private TextField Num_Week;
+    private TextField Num_Week; //integer
 
     @FXML
-    private TextField Prc_Noir;
+    private TextField Prc_Noir; //9999.99
 
     @FXML
-    private TextField Prc_Rose;
+    private TextField Prc_Rose; //9999.99
 
     @FXML
     private Line VLine1;
@@ -121,22 +122,22 @@ public class functionCController {
     private Label opt_result_heading1;
 
     @FXML
-    private TextField or_Bk_Fulfill;
+    private TextField Bko_Fulfill; //boolean
 
     @FXML
-    private TextField or_Prod_Vol_Noir;
+    private TextField Opt_Noir; //integer
 
     @FXML
-    private TextField or_Prod_Vol_Rose;
+    private TextField Opt_Rose; //integer
 
     @FXML
-    private TextField or_Prod_Vol_Total;
+    private TextField Opt_Total; //integer
 
     @FXML
-    private TextField or_Revenue;
+    private TextField Opt_Revenue; //integer
 
     @FXML
-    private Spinner<?> or_scroll_text1;
+    private Spinner<String> or_scroll_text1;
 
     @FXML
     private Line vLine3;
@@ -148,9 +149,51 @@ public class functionCController {
 
     @FXML
     void toclick(ActionEvent event) {
+        //run
+        //list of warnings
+
+
+        //check if any field is empty
+
+
+        //check if fields are in correct data type
+
+
+        //check for negative values
+
+
+        //check if fields are within valid range
+
+
+
+        //if no errors, calculate
+        //use 2-layer nested for loop to compute optimal mix of wines Opt_Rose and Opt_Noir to maximize Opt_Revenue
+
+        //Reserve all resource of both labor and grape to backorders first, then optimize remaining resource of both labor and grape capacity
+        //Revenue = (Opt_Rose * Prc_Rose) + (Opt_Noir * Prc_Noir)
 
     }
 
+    //validate field inputs
+    //abnormal situations:
+    // If Actual Production Capacity < Rose + Opt_Noir, show: "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!"
+    //After optimizing product ix, if consumption of grapes is <90% of given capacity due to insufficient labor supplied, show warning "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!"
+    //If (Bko_Rose + Bko_Noir) < 70% (Opt_Rose + Opt_Noir), show warning: "w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!".
+  public void initialize() {
+        Num_Week.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    //is it between 2301 and 2315?
+
+                } catch (NumberFormatException e) {
+                    //if it's not an integer
+
+                }
+            }
+        });
+
+    }
     @FXML
     void toexit(ActionEvent event) {
 
