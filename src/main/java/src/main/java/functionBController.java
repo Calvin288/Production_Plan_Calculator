@@ -246,6 +246,15 @@ public class functionBController {
         int maxPFromGrape = capGrape/4;
         int maxP = maxPFromLabor > maxPFromGrape ? maxPFromGrape : maxPFromLabor;
 
+        if(prcNoir < 0)
+            prcNoir = 0;
+        if(prcRose < 0)
+            prcRose = 0;
+        if(capLabour < 0)
+            capLabour = 0;
+        if(capGrape < 0)
+            capGrape = 0;
+
         for(int optimalR = 0; optimalR <= maxR; optimalR++)
         {
             for(int optimalP = 0; optimalP <= maxP; optimalP++)
