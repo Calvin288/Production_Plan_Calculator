@@ -166,6 +166,131 @@ public class functionAController {
                 }
             }
         });
+
+        Cap_Labor.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (0 > Integer.parseInt(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.showAndWait();
+                        Cap_Labor.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.showAndWait();
+                    Cap_Labor.setText("");
+                }
+            }
+        });
+
+        Cap_Grape.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (0 > Integer.parseInt(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.showAndWait();
+                        Cap_Grape.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.showAndWait();
+                    Cap_Grape.setText("");
+                }
+            }
+        });
+
+        Prc_Rose.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (0 > Double.parseDouble(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an double greater than 0");
+                        alert.showAndWait();
+                        Prc_Rose.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter an double greater than 0");
+                    alert.showAndWait();
+                    Prc_Rose.setText("");
+                }
+            }
+        });
+
+        Prc_Noir.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (0 > Double.parseDouble(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an double greater than 0");
+                        alert.showAndWait();
+                        Prc_Noir.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter an double greater than 0");
+                    alert.showAndWait();
+                    Prc_Noir.setText("");
+                }
+            }
+        });
+
+        Fixed_Costs.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (0 > Integer.parseInt(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.showAndWait();
+                        Fixed_Costs.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.showAndWait();
+                    Fixed_Costs.setText("");
+                }
+            }
+        });
     }
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
@@ -183,45 +308,37 @@ public class functionAController {
     int productionCap = 5000;   // Litres
 
     public void toclick(ActionEvent actionEvent) {
-        ObservableList<String> items = FXCollections.observableArrayList("No warnings.",
-                "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!",
-                "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).",
-                "W3: Insufficient grape resource to utilize the labor supplied (less than 90%).",
-                "W4: Please fill all the required parameters",
-                "W5: Please fill the text field with the proper format",
-                "W6: Please fill positive values");
-        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
         // check if any text field is empty
         if( tf_empty(Num_Week)  ||
-            tf_empty(Cap_Labor) ||
-            tf_empty(Cap_Grape) ||
-            tf_empty(Prc_Rose)  ||
-            tf_empty(Prc_Noir)  ||
-            tf_empty(Fixed_Costs))
+                tf_empty(Cap_Labor) ||
+                tf_empty(Cap_Grape) ||
+                tf_empty(Prc_Rose)  ||
+                tf_empty(Prc_Noir)  ||
+                tf_empty(Fixed_Costs))
         {
-            or_scroll_text1.getValueFactory().setValue("W4: Please fill all the required parameters");
+            or_scroll_text1.setPromptText("W4: Please fill all the required parameters");
         }
 
         // check if all the text field is the correct format
         else if (   tf_notInt(Num_Week)     ||
-                    tf_notInt(Cap_Labor)    ||
-                    tf_notInt(Cap_Grape)    ||
-                    tf_notDou(Prc_Rose)     ||
-                    tf_notDou(Prc_Noir)     ||
-                    tf_notInt(Fixed_Costs))
+                tf_notInt(Cap_Labor)    ||
+                tf_notInt(Cap_Grape)    ||
+                tf_notDou(Prc_Rose)     ||
+                tf_notDou(Prc_Noir)     ||
+                tf_notInt(Fixed_Costs))
         {
-            or_scroll_text1.getValueFactory().setValue("W5: Please fill the text field with the proper format");
+            or_scroll_text1.setPromptText("W5: Please fill the text field with the proper format");
         }
 
         // check for any negative value
         else if (   tf_negativeInt(Num_Week)    ||
-                    tf_negativeInt(Cap_Labor)   ||
-                    tf_negativeInt(Cap_Grape)   ||
-                    tf_negativeDou(Prc_Rose)    ||
-                    tf_negativeDou(Prc_Noir)    ||
-                    tf_negativeInt(Fixed_Costs))
+                tf_negativeInt(Cap_Labor)   ||
+                tf_negativeInt(Cap_Grape)   ||
+                tf_negativeDou(Prc_Rose)    ||
+                tf_negativeDou(Prc_Noir)    ||
+                tf_negativeInt(Fixed_Costs))
         {
-            or_scroll_text1.getValueFactory().setValue("W6: Please fill positive values");
+            or_scroll_text1.setPromptText("W6: Please fill positive values");
         }
 
         else
@@ -230,8 +347,8 @@ public class functionAController {
             int input_numWeek = Integer.parseInt(Num_Week.getText());
             int input_capLabor = Integer.parseInt(Cap_Labor.getText());
             int input_capGrape = Integer.parseInt(Cap_Grape.getText());
-            double input_prcRose = Double.parseDouble(Prc_Rose.getText());
-            double input_prcNoir = Double.parseDouble(Prc_Noir.getText());
+            double input_prcRose = Math.round((Double.parseDouble(Prc_Rose.getText())*100.0)/100.0);
+            double input_prcNoir = Math.round((Double.parseDouble(Prc_Noir.getText())*100.0)/100.0);
             int input_fixedCosts = Integer.parseInt(Fixed_Costs.getText());
             // find the max revenue
             int maxRevenue = 0;
@@ -245,23 +362,16 @@ public class functionAController {
             int mr_RoseLitre = (input_capLabor/roseLabor > input_capGrape/roseGrape) ? (input_capGrape/roseGrape) : (input_capLabor/roseLabor);
             int mr_NoirLitre = 0;
             int mr_revenue;
-            /*// if the cap larger than productionCap
-            if(mr_RoseLitre > productionCap) {
-                mr_RoseLitre = productionCap;
-            }
-            else {*/
-                // check if there is remaining resource to make noir
 
-                remainingLabour = input_capLabor - (mr_RoseLitre*roseLabor);
-                remainingGrape = input_capGrape - (mr_RoseLitre*roseGrape);
-                if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
-                    mr_NoirLitre = (remainingLabour/noirLabor > remainingGrape/noirGrape) ? (remainingGrape/noirGrape) : (remainingLabour/noirLabor);
-                    // check if it passes productionCap
-                    if (mr_RoseLitre + mr_NoirLitre > productionCap) {
-                        mr_NoirLitre = productionCap - mr_RoseLitre;
-                    }
+            remainingLabour = input_capLabor - (mr_RoseLitre*roseLabor);
+            remainingGrape = input_capGrape - (mr_RoseLitre*roseGrape);
+            if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
+                mr_NoirLitre = (remainingLabour/noirLabor > remainingGrape/noirGrape) ? (remainingGrape/noirGrape) : (remainingLabour/noirLabor);
+                // check if it passes productionCap
+                if (mr_RoseLitre + mr_NoirLitre > productionCap) {
+                    mr_NoirLitre = productionCap - mr_RoseLitre;
                 }
-            //}
+            }
             mr_revenue = (int) (mr_RoseLitre*input_prcRose + mr_NoirLitre*input_prcNoir);
             maxRevenue = mr_revenue;
             roseProduced = mr_RoseLitre;
@@ -271,22 +381,16 @@ public class functionAController {
             int mn_RoseLitre = 0;
             int mn_NoirLitre = (input_capLabor/noirLabor > input_capGrape/noirGrape) ? (input_capGrape/noirGrape) : (input_capLabor/noirLabor);
             int mn_revenue;
-            /*// if the cap larger than productionCap
-            if(mn_NoirLitre > productionCap) {
-                mn_NoirLitre = productionCap;
-            }*/
-            //else {
-                // check if there is remaining resource to make rose
-                remainingLabour = input_capLabor - (mn_NoirLitre*noirLabor);
-                remainingGrape = input_capGrape - (mn_NoirLitre*noirGrape);
-                if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
-                    mn_RoseLitre = (remainingLabour/roseLabor > remainingGrape/roseGrape) ? (remainingGrape/roseGrape) : (remainingLabour/roseLabor);
-                    // check if it passes productionCap
-                    if (mn_RoseLitre + mn_NoirLitre > productionCap) {
-                        mn_RoseLitre = productionCap - mn_NoirLitre;
-                    }
+            // check if there is remaining resource to make rose
+            remainingLabour = input_capLabor - (mn_NoirLitre*noirLabor);
+            remainingGrape = input_capGrape - (mn_NoirLitre*noirGrape);
+            if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
+                mn_RoseLitre = (remainingLabour/roseLabor > remainingGrape/roseGrape) ? (remainingGrape/roseGrape) : (remainingLabour/roseLabor);
+                // check if it passes productionCap
+                if (mn_RoseLitre + mn_NoirLitre > productionCap) {
+                    mn_RoseLitre = productionCap - mn_NoirLitre;
                 }
-            //}
+            }
             mn_revenue = (int) (mn_RoseLitre*input_prcRose + mn_NoirLitre*input_prcNoir);
             if (mn_revenue > maxRevenue) {
                 maxRevenue = mn_revenue;
@@ -369,7 +473,8 @@ public class functionAController {
             noirProduced *= input_numWeek;
             maxRevenue *= input_numWeek;
 
-            double vcl = (roseProduced*5*60*37.5/935) + (noirProduced*5*60*37.5/935);
+            //double vcl = (roseProduced*5*60*37.5/935) + (noirProduced*5*60*37.5/935);
+            double vcl = ((roseProduced*roseLabor)+(noirProduced*noirLabor)) * (935/(37.5*60));
             double grossProfit = maxRevenue - vcl - input_fixedCosts;
             int i_grossProfit = (int) grossProfit;
             double profitMargin = (grossProfit/maxRevenue)*1000;
@@ -408,17 +513,19 @@ public class functionAController {
             or_Profit_Margin.setText(String.valueOf(updatedProfitMargin));
 
             // give warning
+            String warnings = "";
             if ((roseProduced+noirProduced)>(productionCap*input_numWeek)) {
-                or_scroll_text1.getValueFactory().setValue("W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!");
+                warnings += "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
             }
             if (input_capGrape > 0 && input_capLabor > 0) {
                 if (((input_capGrape - remainingGrape) * 100 / input_capGrape) < 90) {
-                    or_scroll_text1.getValueFactory().setValue("W2: Insufficient labor supplied to utilize the grape resource (less than 90%).");
+                    warnings += "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).\r";
                 }
                 else if (((input_capLabor - remainingLabour) * 100 / input_capLabor) < 90) {
-                    or_scroll_text1.getValueFactory().setValue("W3: Insufficient grape resource to utilize the labor supplied (less than 90%).");
+                    warnings += "W3: Insufficient grape resource to utilize the labor supplied (less than 90%).\r";
                 }
             }
+            or_scroll_text1.setPromptText(warnings);
         }
     }
 
