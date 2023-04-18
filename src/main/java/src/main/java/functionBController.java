@@ -9,6 +9,8 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+import javax.swing.*;
+
 public class functionBController {
 
     @FXML
@@ -130,6 +132,44 @@ public class functionBController {
 
     @FXML
     private Line vLine3;
+
+    public void setUp(TextField weekOfYear, TextField capGrape, TextField capLabour, TextField prcNoir, TextField prcRose) {
+        WeekOfYear = weekOfYear;
+        Cap_Grape = capGrape;
+        Cap_Labor = capLabour;
+        Prc_Noir = prcNoir;
+        Prc_Rose = prcRose;
+    }
+
+    public String getGrapeSurplus()
+    {
+        return or_Grape_Surplus.getText();
+    }
+
+    public String getLaborSurplus()
+    {
+        return or_Labor_Surplus.getText();
+    }
+
+    public String getOptimalNoirProduction()
+    {
+        return or_Prod_Vol_Noir.getText();
+    }
+
+    public String getOptimalRoseProduction()
+    {
+        return or_Prod_Vol_Rose.getText();
+    }
+
+    public String getOptimalTotalProduction()
+    {
+        return or_Prod_Vol_Total.getText();
+    }
+
+    public String getTotalRevenue()
+    {
+        return or_Total_Revenue.getText();
+    }
 
     public void initialize() {
         WeekOfYear.textProperty().addListener(new ChangeListener<String>() {
@@ -300,5 +340,6 @@ public class functionBController {
     void toexit(ActionEvent event) {
         Main.stage.setScene(Main.scene);
     }
+
 
 }
