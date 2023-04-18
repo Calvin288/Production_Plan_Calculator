@@ -55,5 +55,12 @@ public class comp3111pcc1Controller {
     private void exit1() throws IOException {
         System.exit(0);
     }
+
+
+    @FXML
+    private void functionC() throws IOException {
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/ppc1_function_C.fxml")));
+        Main.stage.setScene(scene);
+    }
 }
 
