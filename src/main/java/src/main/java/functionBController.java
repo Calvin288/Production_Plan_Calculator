@@ -11,6 +11,17 @@ import javafx.scene.shape.Line;
 
 import javax.swing.*;
 
+/**
+ * <p>The Weekly Review that concerns Revenue program implements an
+ * application that finds the optimal combination of Rose and Pinot Noir.
+ * to maximise revenue
+ * constraints.</p>
+ *
+ * @author  Calvin Wiogo
+ * @version 1.0
+ * @since   2023-04-19
+ */
+
 public class functionBController {
 
     @FXML
@@ -139,6 +150,13 @@ public class functionBController {
         Cap_Labor = capLabour;
         Prc_Noir = prcNoir;
         Prc_Rose = prcRose;
+        or_scroll_text1 = new Spinner<String>();
+        or_Prod_Vol_Total = new TextField();
+        or_Prod_Vol_Noir = new TextField();
+        or_Prod_Vol_Rose = new TextField();
+        or_Total_Revenue = new TextField();
+        or_Grape_Surplus = new TextField();
+        or_Labor_Surplus = new TextField();
     }
 
     public String getGrapeSurplus()
@@ -274,8 +292,8 @@ public class functionBController {
         int optimalRevenue = 0;
         int optimalRose = 0;
         int optimalNoir = 0;
-        float prcRose = Float.parseFloat(Prc_Rose.textProperty().getValue());
-        float prcNoir = Float.parseFloat(Prc_Noir.textProperty().getValue());
+        double prcRose = Math.round(Float.parseFloat(Prc_Rose.textProperty().getValue())*100.0) /100.0;
+        double prcNoir = Math.round(Float.parseFloat(Prc_Noir.textProperty().getValue())*100.0) /100.0;
         int capLabour =  Integer.parseInt(Cap_Labor.textProperty().getValue());
         int capGrape = Integer.parseInt(Cap_Grape.textProperty().getValue());
         int maxRFromLabor = capLabour/5;
@@ -284,15 +302,6 @@ public class functionBController {
         int maxPFromLabor = capLabour/12;
         int maxPFromGrape = capGrape/4;
         int maxP = maxPFromLabor > maxPFromGrape ? maxPFromGrape : maxPFromLabor;
-
-        if(prcNoir < 0)
-            prcNoir = 0;
-        if(prcRose < 0)
-            prcRose = 0;
-        if(capLabour < 0)
-            capLabour = 0;
-        if(capGrape < 0)
-            capGrape = 0;
 
         for(int optimalR = 0; optimalR <= maxR; optimalR++)
         {
