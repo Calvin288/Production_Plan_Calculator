@@ -229,6 +229,20 @@ public class functionAController {
                         alert.showAndWait();
                         Prc_Rose.setText("");
                     } else {
+                        if (newValue.contains(".")) {
+                            String[] parts = newValue.split("\\.");
+                            if (parts[1].length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter only double with 2 decimal points");
+                                alert.showAndWait();
+                                Prc_Rose.setText("");
+                            }
+                            else {
+
+                            }
+                        }
 
                     }
                 } catch (NumberFormatException e) {
@@ -254,7 +268,20 @@ public class functionAController {
                         alert.showAndWait();
                         Prc_Noir.setText("");
                     } else {
+                        if (newValue.contains(".")) {
+                            String[] parts = newValue.split("\\.");
+                            if (parts[1].length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter only double with 2 decimal points");
+                                alert.showAndWait();
+                                Prc_Noir.setText("");
+                            }
+                            else {
 
+                            }
+                        }
                     }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -425,7 +452,7 @@ public class functionAController {
 
             int c_revenue = (int) (c_rose*input_prcRose + c_noir*input_prcNoir);
             if (c_revenue > maxRevenue && !case3Negative) {
-                System.out.println("case 3");
+                //System.out.println("case 3");
                 maxRevenue = c_revenue;
                 roseProduced = c_rose;
                 noirProduced = c_noir;
@@ -483,7 +510,7 @@ public class functionAController {
             updatedProfitMargin = updatedProfitMargin/10;
 
             // console check
-            System.out.println("Remaining grapes");
+            /*System.out.println("Remaining grapes");
             System.out.println(remainingGrape);
             System.out.println("Remaining labour");
             System.out.println(remainingLabour);
@@ -503,7 +530,7 @@ public class functionAController {
             System.out.println(noirProduced*noirLabor);
             System.out.println("Total");
             System.out.println((roseProduced*roseLabor)+(noirProduced*noirLabor));
-            System.out.println();
+            System.out.println();*/
 
             // list of outputs
             or_Prod_Vol_Rose.setText(String.valueOf(roseProduced));
@@ -578,4 +605,45 @@ public class functionAController {
         }
         return false;
     }
+
+    public void setUp(TextField num_Week, TextField capGrape, TextField capLabor, TextField prcNoir, TextField prcRose, TextField fixedCosts) {
+        Num_Week = num_Week;
+        Cap_Grape = capGrape;
+        Cap_Labor = capLabor;
+        Prc_Noir = prcNoir;
+        Prc_Rose = prcRose;
+        Fixed_Costs = fixedCosts;
+        or_scroll_text1 = new Spinner<String>();
+        or_Prod_Vol_Total = new TextField();
+        or_Prod_Vol_Noir = new TextField();
+        or_Prod_Vol_Rose = new TextField();
+        or_Gross_Profit = new TextField();
+        or_Profit_Margin = new TextField();
+    }
+
+    public String getProdVolRose()
+    {
+        return or_Prod_Vol_Rose.getText();
+    }
+
+    public String getProdVolNoir()
+    {
+        return or_Prod_Vol_Noir.getText();
+    }
+
+    public String getProdVolTotal()
+    {
+        return or_Prod_Vol_Total.getText();
+    }
+
+    public String getProfitMargin()
+    {
+        return or_Profit_Margin.getText();
+    }
+
+    public String getGrossProfit()
+    {
+        return or_Gross_Profit.getText();
+    }
+
 }
