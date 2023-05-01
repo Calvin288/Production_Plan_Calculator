@@ -15,6 +15,31 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
+/**
+ * <h1>Production Plan Calculator</h1>
+ *
+ * This is the functionA of Group 7 COMP3111 Project Spring 2023
+ * Function A is used to help the user in computing the optimal mix of wines
+ * to be produced in the year for maximizing the gross profit for the winery
+ *
+ * The user have 6 inputs in the unit interface:
+ * 1. Num_Week (integer, 0 < x < 15) = number of weeks to be estimated for the harvest season
+ * 2. Cap_Labor (integer) = labor resource planned for the production cycle
+ * 3. Cap_Grape (integer) = grape resource planned for the production cycle
+ * 4. Prc_Rose (double, x.xx format) = price of rose wine
+ * 5. Prc_Noir (double, x.xx format) = price of pinot-noir wine
+ * 6. Fixed_Costs (integer) = total fixed costs of operating and manufacturing overheads
+ *
+ * The function will output the following:
+ * 1. Opt_Rose = the optimal amount of rose wine production in litres
+ * 2. Opt_Noir = the optimal amount of pinot-noir wine production in litres
+ * 3. Opt_Profit = the optimized total gross profit before tax could be generated for the year
+ * 4. Opt_Margin = the optimized profit margin in x.x% format
+ *
+ * @author  Albertus Alexander
+ * @version 1.0
+ * @since   2023-04-30
+ */
 public class functionAController {
 
     @FXML
@@ -229,6 +254,20 @@ public class functionAController {
                         alert.showAndWait();
                         Prc_Rose.setText("");
                     } else {
+                        if (newValue.contains(".")) {
+                            String[] parts = newValue.split("\\.");
+                            if (parts[1].length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter only double with 2 decimal points");
+                                alert.showAndWait();
+                                Prc_Rose.setText("");
+                            }
+                            else {
+
+                            }
+                        }
 
                     }
                 } catch (NumberFormatException e) {
@@ -254,7 +293,20 @@ public class functionAController {
                         alert.showAndWait();
                         Prc_Noir.setText("");
                     } else {
+                        if (newValue.contains(".")) {
+                            String[] parts = newValue.split("\\.");
+                            if (parts[1].length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter only double with 2 decimal points");
+                                alert.showAndWait();
+                                Prc_Noir.setText("");
+                            }
+                            else {
 
+                            }
+                        }
                     }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -425,7 +477,7 @@ public class functionAController {
 
             int c_revenue = (int) (c_rose*input_prcRose + c_noir*input_prcNoir);
             if (c_revenue > maxRevenue && !case3Negative) {
-                System.out.println("case 3");
+                //System.out.println("case 3");
                 maxRevenue = c_revenue;
                 roseProduced = c_rose;
                 noirProduced = c_noir;
@@ -481,29 +533,6 @@ public class functionAController {
             int convertingPM = (int) profitMargin;
             double updatedProfitMargin = convertingPM;
             updatedProfitMargin = updatedProfitMargin/10;
-
-            // console check
-            System.out.println("Remaining grapes");
-            System.out.println(remainingGrape);
-            System.out.println("Remaining labour");
-            System.out.println(remainingLabour);
-            System.out.println();
-            System.out.println("Consumed grapes");
-            System.out.println("Rose");
-            System.out.println(roseProduced*roseGrape);
-            System.out.println("Noir");
-            System.out.println(noirProduced*noirGrape);
-            System.out.println("Total");
-            System.out.println((roseProduced*roseGrape)+(noirProduced*noirGrape));
-            System.out.println();
-            System.out.println("Consumed labour");
-            System.out.println("Rose");
-            System.out.println(roseProduced*roseLabor);
-            System.out.println("Noir");
-            System.out.println(noirProduced*noirLabor);
-            System.out.println("Total");
-            System.out.println((roseProduced*roseLabor)+(noirProduced*noirLabor));
-            System.out.println();
 
             // list of outputs
             or_Prod_Vol_Rose.setText(String.valueOf(roseProduced));
@@ -578,4 +607,45 @@ public class functionAController {
         }
         return false;
     }
+
+    public void setUp(TextField num_Week, TextField capGrape, TextField capLabor, TextField prcNoir, TextField prcRose, TextField fixedCosts) {
+        Num_Week = num_Week;
+        Cap_Grape = capGrape;
+        Cap_Labor = capLabor;
+        Prc_Noir = prcNoir;
+        Prc_Rose = prcRose;
+        Fixed_Costs = fixedCosts;
+        or_scroll_text1 = new Spinner<String>();
+        or_Prod_Vol_Total = new TextField();
+        or_Prod_Vol_Noir = new TextField();
+        or_Prod_Vol_Rose = new TextField();
+        or_Gross_Profit = new TextField();
+        or_Profit_Margin = new TextField();
+    }
+
+    public String getProdVolRose()
+    {
+        return or_Prod_Vol_Rose.getText();
+    }
+
+    public String getProdVolNoir()
+    {
+        return or_Prod_Vol_Noir.getText();
+    }
+
+    public String getProdVolTotal()
+    {
+        return or_Prod_Vol_Total.getText();
+    }
+
+    public String getProfitMargin()
+    {
+        return or_Profit_Margin.getText();
+    }
+
+    public String getGrossProfit()
+    {
+        return or_Gross_Profit.getText();
+    }
+
 }
