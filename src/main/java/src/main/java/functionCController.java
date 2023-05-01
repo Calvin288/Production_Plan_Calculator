@@ -11,6 +11,17 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+/**
+ * <h1>Weekly Review with Revenue & Backorder</h1>
+ * <p>The Weekly Review with Revenue & Backorder  program implements an
+ * application that finds the optimal combination of Rose and Pinot Noir.
+ * to maxmise revenue and meet backorder given labor and grape capacity
+ * constraints.</p>
+ *
+ * @author  Nidhi Shah
+ * @version 1.0
+ * @since   2023-04-19
+ */
 public class functionCController {
 
     @FXML
@@ -332,8 +343,71 @@ public class functionCController {
         }
     }
 
-    public void initialize() {}
-    @FXML
+    public void initialize() {
+        Num_Week.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (2301 > Integer.parseInt(newValue) || 2315 < Integer.parseInt(newValue)) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0 and less than 15");
+                        alert.showAndWait();
+                        Num_Week.setText("");
+                    } else {
+
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter the number greater than 0 and less than 15");
+                    alert.showAndWait();
+                    Num_Week.setText("");
+                }
+            }
+        });
+
+        Prc_Rose.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    //check if it is a positive float
+                    if (Float.parseFloat(newValue) < 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive float");
+                        alert.showAndWait();
+                        Prc_Rose.setText("");
+                    } else {
+                        //If it is a decimal, it should have no more than 2 decimal places
+                        if (newValue.contains(".")) {
+                            if (newValue.substring(newValue.indexOf(".") + 1).length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter a float with no more than 2 decimal places");
+                                alert.showAndWait();
+                                Prc_Rose.setText("");
+                            }
+                        }
+                    }
+
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter the number greater than 0 and less than 15");
+                    alert.showAndWait();
+                    Num_Week.setText("");
+                }
+            }
+        });
+    }
+
+        @FXML
     void toexit(ActionEvent event) {
         Main.stage.setScene(Main.scene);
     }
