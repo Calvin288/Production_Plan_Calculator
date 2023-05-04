@@ -2,8 +2,6 @@ package src.main.java;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,9 +9,6 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
 
 /**
  * <h1>Production Plan Calculator</h1>
@@ -163,19 +158,24 @@ public class functionAController {
     private Line vLine3;
 
     @FXML
-    void buttonpressed(ActionEvent event) {
+    void buttonpressed(ActionEvent event) {}
 
-    }
+    int roseLabor = 5;  // Minutes
+    int noirLabor = 12; // Minutes
+    int roseGrape = 6;  // Kg
+    int noirGrape = 4;  // Kg
+    int productionCap = 5000;   // Litres
+
     public void initialize() {
         Num_Week.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue) || 15 < Integer.parseInt(newValue)) {
+                    if (1 > Integer.parseInt(newValue) || 16 < Integer.parseInt(newValue)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0 and less than 15");
+                        alert.setContentText("Please enter an integer greater than 0 and less than 16");
                         alert.showAndWait();
                         Num_Week.setText("");
                     } else {
@@ -185,7 +185,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0 and less than 15");
+                    alert.setContentText("Please enter the number greater than 0 and less than 16");
                     alert.showAndWait();
                     Num_Week.setText("");
                 }
@@ -196,11 +196,11 @@ public class functionAController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue)) {
+                    if (!(1 <= Integer.parseInt(newValue))) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.setContentText("Please enter an integer greater than or equal 1");
                         alert.showAndWait();
                         Cap_Labor.setText("");
                     } else {
@@ -210,7 +210,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.setContentText("Please enter an integer greater than or equal 1");
                     alert.showAndWait();
                     Cap_Labor.setText("");
                 }
@@ -221,11 +221,11 @@ public class functionAController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue)) {
+                    if (!(1 <= Integer.parseInt(newValue))) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.setContentText("Please enter an integer greater than or equal 1");
                         alert.showAndWait();
                         Cap_Grape.setText("");
                     } else {
@@ -235,7 +235,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.setContentText("Please enter an integer greater than or equal 1");
                     alert.showAndWait();
                     Cap_Grape.setText("");
                 }
@@ -246,11 +246,11 @@ public class functionAController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Double.parseDouble(newValue)) {
+                    if (!(1 <= Double.parseDouble(newValue))) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an double greater than 0");
+                        alert.setContentText("Please enter an double greater than or equal 1");
                         alert.showAndWait();
                         Prc_Rose.setText("");
                     } else {
@@ -274,7 +274,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter an double greater than 0");
+                    alert.setContentText("Please enter an double greater than or equal 1");
                     alert.showAndWait();
                     Prc_Rose.setText("");
                 }
@@ -285,11 +285,11 @@ public class functionAController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Double.parseDouble(newValue)) {
+                    if (!(1 <= Double.parseDouble(newValue))) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an double greater than 0");
+                        alert.setContentText("Please enter an double greater than or equal 1");
                         alert.showAndWait();
                         Prc_Noir.setText("");
                     } else {
@@ -312,7 +312,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter an double greater than 0");
+                    alert.setContentText("Please enter an double greater than or equal 1");
                     alert.showAndWait();
                     Prc_Noir.setText("");
                 }
@@ -323,11 +323,11 @@ public class functionAController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue)) {
+                    if (!(1 <= Integer.parseInt(newValue))) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.setContentText("Please enter an integer greater than or equal 1");
                         alert.showAndWait();
                         Fixed_Costs.setText("");
                     } else {
@@ -337,7 +337,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter an integer greater than 0");
+                    alert.setContentText("Please enter an integer greater than or equal 1");
                     alert.showAndWait();
                     Fixed_Costs.setText("");
                 }
@@ -352,12 +352,6 @@ public class functionAController {
 
     public void toexit(ActionEvent actionEvent) {Main.stage.setScene(Main.scene);
     }
-
-    int roseLabor = 5;  // Minutes
-    int noirLabor = 12; // Minutes
-    int roseGrape = 6;  // Kg
-    int noirGrape = 4;  // Kg
-    int productionCap = 5000;   // Litres
 
     public void toclick(ActionEvent actionEvent) {
         // check if any text field is empty
@@ -399,151 +393,25 @@ public class functionAController {
             int input_numWeek = Integer.parseInt(Num_Week.getText());
             int input_capLabor = Integer.parseInt(Cap_Labor.getText());
             int input_capGrape = Integer.parseInt(Cap_Grape.getText());
-            double input_prcRose = Math.round((Double.parseDouble(Prc_Rose.getText())*100.0)/100.0);
-            double input_prcNoir = Math.round((Double.parseDouble(Prc_Noir.getText())*100.0)/100.0);
+            double input_prcRose = Double.parseDouble(Prc_Rose.getText());
+            double input_prcNoir = Double.parseDouble(Prc_Noir.getText());
             int input_fixedCosts = Integer.parseInt(Fixed_Costs.getText());
             // find the max revenue
-            int maxRevenue = 0;
-            int roseProduced;
-            int noirProduced ;
-            int remainingLabour;
-            int remainingGrape ;
-
-            // case 1: maximize rose (mr)
-            // calculate the max amount of rose that can be produced
-            int mr_RoseLitre = (input_capLabor/roseLabor > input_capGrape/roseGrape) ? (input_capGrape/roseGrape) : (input_capLabor/roseLabor);
-            int mr_NoirLitre = 0;
-            int mr_revenue;
-
-            remainingLabour = input_capLabor - (mr_RoseLitre*roseLabor);
-            remainingGrape = input_capGrape - (mr_RoseLitre*roseGrape);
-            if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
-                mr_NoirLitre = (remainingLabour/noirLabor > remainingGrape/noirGrape) ? (remainingGrape/noirGrape) : (remainingLabour/noirLabor);
-                // check if it passes productionCap
-                if (mr_RoseLitre + mr_NoirLitre > productionCap) {
-                    mr_NoirLitre = productionCap - mr_RoseLitre;
-                }
-            }
-            mr_revenue = (int) (mr_RoseLitre*input_prcRose + mr_NoirLitre*input_prcNoir);
-            maxRevenue = mr_revenue;
-            roseProduced = mr_RoseLitre;
-            noirProduced = mr_NoirLitre;
-
-            // case 2: maximize noir (mn)
-            int mn_RoseLitre = 0;
-            int mn_NoirLitre = (input_capLabor/noirLabor > input_capGrape/noirGrape) ? (input_capGrape/noirGrape) : (input_capLabor/noirLabor);
-            int mn_revenue;
-            // check if there is remaining resource to make rose
-            remainingLabour = input_capLabor - (mn_NoirLitre*noirLabor);
-            remainingGrape = input_capGrape - (mn_NoirLitre*noirGrape);
-            if (remainingLabour >= noirLabor && remainingGrape >= noirGrape) {
-                mn_RoseLitre = (remainingLabour/roseLabor > remainingGrape/roseGrape) ? (remainingGrape/roseGrape) : (remainingLabour/roseLabor);
-                // check if it passes productionCap
-                if (mn_RoseLitre + mn_NoirLitre > productionCap) {
-                    mn_RoseLitre = productionCap - mn_NoirLitre;
-                }
-            }
-            mn_revenue = (int) (mn_RoseLitre*input_prcRose + mn_NoirLitre*input_prcNoir);
-            if (mn_revenue > maxRevenue) {
-                maxRevenue = mn_revenue;
-                roseProduced = mn_RoseLitre;
-                noirProduced = mn_NoirLitre;
-            }
-
-            // case 3: maximize both rose and noir
-            boolean case3 = false;
-            boolean case3Negative = false;
-            int grape_noir = input_capGrape/noirGrape;
-            int minutes_noir = input_capLabor/noirLabor;
-            int grape_rose = input_capGrape/roseGrape;
-            int minutes_rose = input_capLabor/roseLabor;
-
-            long[] a = {grape_noir,grape_rose,(-1*grape_noir*grape_rose)};
-            long[] b = {minutes_noir,minutes_rose,(-1*minutes_noir*minutes_rose)};
-            long[] cross_section = intersection(a, b);
-
-            int c_rose = (int) cross_section[0];
-            int c_noir = (int) cross_section[1];
-
-            if(c_rose<0 || c_noir<0) {
-                case3Negative = true;
-            }
-            if ((input_capGrape - (roseGrape*c_rose) - (noirGrape*c_noir))<0) {
-                case3Negative = true;
-            }
-            if ((input_capLabor - (roseLabor*c_rose) - (noirLabor*c_noir))<0) {
-                case3Negative = true;
-            }
-
-            int c_revenue = (int) (c_rose*input_prcRose + c_noir*input_prcNoir);
-            if (c_revenue > maxRevenue && !case3Negative) {
-                //System.out.println("case 3");
-                maxRevenue = c_revenue;
-                roseProduced = c_rose;
-                noirProduced = c_noir;
-                case3 = true;
-            }
-
-            // check if it is feasible to add 1 more litre of rose or noir
-            remainingGrape = input_capGrape - (roseGrape*roseProduced) - (noirGrape*noirProduced);
-            remainingLabour = input_capLabor - (roseLabor*roseProduced) - (noirLabor*noirProduced);
-
-            //if (c_rose + c_noir < productionCap && case3) {
-            if (case3) {
-                if (input_prcRose > input_prcNoir) {
-                    if ((remainingGrape >= roseGrape) && (remainingLabour >= roseLabor)) {
-                        maxRevenue += input_prcRose;
-                        roseProduced += 1;
-                        remainingGrape -= roseGrape;
-                        remainingLabour -= roseLabor;
-                    }
-                    else if ((remainingGrape >= noirGrape) && (remainingLabour >= noirLabor)) {
-                        maxRevenue += input_prcNoir;
-                        noirProduced += 1;
-                        remainingGrape -= noirGrape;
-                        remainingLabour -= noirLabor;
-                    }
-                }
-                else {
-                    if ((remainingGrape >= noirGrape) && (remainingLabour >= noirLabor)) {
-                        maxRevenue += input_prcNoir;
-                        noirProduced += 1;
-                        remainingGrape -= noirGrape;
-                        remainingLabour -= noirLabor;
-                    }
-                    else if ((remainingGrape >= roseGrape) && (remainingLabour >= roseLabor)) {
-                        maxRevenue += input_prcRose;
-                        roseProduced += 1;
-                        remainingGrape -= roseGrape;
-                        remainingLabour -= roseLabor;
-                    }
-                }
-            }
-
-            // multiply by weeks
-            roseProduced *= input_numWeek;
-            noirProduced *= input_numWeek;
-            maxRevenue *= input_numWeek;
-
-            //double vcl = (roseProduced*5*60*37.5/935) + (noirProduced*5*60*37.5/935);
-            double vcl = ((roseProduced*roseLabor)+(noirProduced*noirLabor)) * (935/(37.5*60));
-            double grossProfit = maxRevenue - vcl - input_fixedCosts;
-            int i_grossProfit = (int) grossProfit;
-            double profitMargin = (grossProfit/maxRevenue)*1000;
-            int convertingPM = (int) profitMargin;
-            double updatedProfitMargin = convertingPM;
-            updatedProfitMargin = updatedProfitMargin/10;
+            functionA opt = new functionA();
+            opt.optimize(input_numWeek, input_capLabor, input_capGrape, input_prcRose, input_prcNoir, input_fixedCosts);
 
             // list of outputs
-            or_Prod_Vol_Rose.setText(String.valueOf(roseProduced));
-            or_Prod_Vol_Noir.setText(String.valueOf(noirProduced));
-            or_Prod_Vol_Total.setText(String.valueOf(roseProduced+noirProduced));
-            or_Gross_Profit.setText(String.valueOf(i_grossProfit));
-            or_Profit_Margin.setText(String.valueOf(updatedProfitMargin));
+            or_Prod_Vol_Rose.setText(String.valueOf(opt.getOptimizedRose()));
+            or_Prod_Vol_Noir.setText(String.valueOf(opt.getOptimizedNoir()));
+            or_Prod_Vol_Total.setText(String.valueOf(opt.getOptimizedTotal()));
+            or_Gross_Profit.setText(String.valueOf(opt.getOptimizedProfit()));
+            or_Profit_Margin.setText(String.valueOf(opt.getOptimizedMargin()));
 
             // give warning
+            int remainingGrape = input_capGrape*input_numWeek - (roseGrape*opt.getOptimizedRose()) - (noirGrape*opt.getOptimizedNoir());
+            int remainingLabour = input_capLabor*input_numWeek - (roseLabor*opt.getOptimizedRose()) - (noirLabor*opt.getOptimizedNoir());
             String warnings = "";
-            if ((roseProduced+noirProduced)>(productionCap*input_numWeek)) {
+            if (opt.getOptimizedTotal()>(productionCap*input_numWeek)) {
                 warnings += "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
             }
             if (input_capGrape > 0 && input_capLabor > 0) {
@@ -556,15 +424,6 @@ public class functionAController {
             }
             or_scroll_text1.setPromptText(warnings);
         }
-    }
-
-    public long[] intersection(long[] a, long[] b) {
-        long[] result = {0, 0};
-        if ((a[0]*b[1])-(b[0]*a[1]) != 0) {
-            result[0] = ((a[1]*b[2])-b[1]*a[2])/((a[0]*b[1])-(b[0]*a[1]));
-            result[1] = ((b[0]*a[2])-(a[0]*b[2]))/((a[0]*b[1])-(b[0]*a[1]));
-        }
-        return result;
     }
 
     public boolean tf_empty (TextField x) {
@@ -607,45 +466,4 @@ public class functionAController {
         }
         return false;
     }
-
-    public void setUp(TextField num_Week, TextField capGrape, TextField capLabor, TextField prcNoir, TextField prcRose, TextField fixedCosts) {
-        Num_Week = num_Week;
-        Cap_Grape = capGrape;
-        Cap_Labor = capLabor;
-        Prc_Noir = prcNoir;
-        Prc_Rose = prcRose;
-        Fixed_Costs = fixedCosts;
-        or_scroll_text1 = new Spinner<String>();
-        or_Prod_Vol_Total = new TextField();
-        or_Prod_Vol_Noir = new TextField();
-        or_Prod_Vol_Rose = new TextField();
-        or_Gross_Profit = new TextField();
-        or_Profit_Margin = new TextField();
-    }
-
-    public String getProdVolRose()
-    {
-        return or_Prod_Vol_Rose.getText();
-    }
-
-    public String getProdVolNoir()
-    {
-        return or_Prod_Vol_Noir.getText();
-    }
-
-    public String getProdVolTotal()
-    {
-        return or_Prod_Vol_Total.getText();
-    }
-
-    public String getProfitMargin()
-    {
-        return or_Profit_Margin.getText();
-    }
-
-    public String getGrossProfit()
-    {
-        return or_Gross_Profit.getText();
-    }
-
 }
