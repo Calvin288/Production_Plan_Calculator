@@ -228,6 +228,9 @@ public class functionCController {
         //ObservableList<String> warnings = FXCollections.observableArrayList("No warnings.","W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!","W2: Insufficient labor supplied to utilize the grape resource (less than 90%)!", "W3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!", "W4: Please fill all the required parameters", "W5: Please fill the text field with the proper format", "W6: Please fill the text field with the proper range");
         //or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(warnings));
 
+        //first clear list of warnings from previous run:
+        or_scroll_text1.setPromptText(" ");
+
         //validate field inputs
         //check if any field is empty
         if (Bko_Noir.getText().isEmpty() || Bko_Rose.getText().isEmpty() || Cap_Grape.getText().isEmpty() || Cap_Labor.getText().isEmpty() || Num_Week.getText().isEmpty() || Prc_Noir.getText().isEmpty() || Prc_Rose.getText().isEmpty()) {
@@ -253,8 +256,8 @@ public class functionCController {
             int Cap_Grapes = Integer.parseInt(Cap_Grape.getText());
             int Cap_Labors = Integer.parseInt(Cap_Labor.getText());
             int Num_Weeks = Integer.parseInt(Num_Week.getText());
-            float Prc_Noirs = Float.parseFloat(Prc_Noir.getText());
-            float Prc_Roses = Float.parseFloat(Prc_Rose.getText());
+            double Prc_Noirs = Double.parseDouble(Prc_Noir.getText());
+            double Prc_Roses = Double.parseDouble(Prc_Rose.getText());
 
             //find max revenue and meet backorders
             functionC opt = new functionC();

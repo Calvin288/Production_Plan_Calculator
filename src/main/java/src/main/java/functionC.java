@@ -22,7 +22,7 @@ public class functionC {
 
 
     //Private functions
-    public void optimize(int Bcko_Rose, int Bcko_Noir, int Cap_Grapes, int Cap_Labors, int Num_Weeks, float Prc_Noirs, float Prc_Roses) {
+    public void optimize(int Bcko_Rose, int Bcko_Noir, int Cap_Grapes, int Cap_Labors, int Num_Weeks, double Prc_Noirs, double Prc_Roses) {
         //use 2-layer nested for loop to compute optimal mix of wines Opt_Rose and Opt_Noir to maximize Opt_Revenue
         //Reserve all resource of both labor and grape to backorders first, then optimize remaining resource of both labor and grape capacity
         //Sales Revenue = (Opt_Rose * Prc_Rose) + (Opt_Noir * Prc_Noir)
@@ -52,7 +52,6 @@ public class functionC {
         //B: If backorders can be met
         else {
             backorderFulfilled = true;
-
             //there is still capacity after backorders
             //optimize with remaining capacity of labor and grape
             for (int r = 0; r <= remainingLabour / LABOUR_PER_ROSE; r++) {
