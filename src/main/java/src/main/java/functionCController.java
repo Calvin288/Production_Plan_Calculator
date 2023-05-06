@@ -515,7 +515,7 @@ public class functionCController {
         //end of input validation
     }
 
-        @FXML
+    @FXML
     void toexit(ActionEvent event) {
         Main.stage.setScene(Main.scene);
     }
