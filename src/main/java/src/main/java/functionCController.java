@@ -20,10 +20,10 @@ import javafx.scene.shape.Line;
  * constraints.</p>
  * The user has 7 inputs in the interface:
  * 1. Num_Week (integer, 23XX where 01<=XX<=15) = current week of the year
- * 2. Cap_Labor (integer, >=0) = labor capacity in minutes
- * 3. Cap_Grape (integer, >=0) = grape capacity in kg
- * 4. Prc_Rose (float 2dp (9999.99), >=0) = price of rose per litre
- * 5. Prc_Noir (float 2dp (9999.99), >=0) = price of pinot noir per litre
+ * 2. Cap_Labor (integer, >=1) = labor capacity in minutes
+ * 3. Cap_Grape (integer, >=1) = grape capacity in kg
+ * 4. Prc_Rose (float 2dp (9999.99), >=1) = price of rose per litre
+ * 5. Prc_Noir (float 2dp (9999.99), >=1) = price of pinot noir per litre
  * 6. Bko_Rose (integer, >=0) = rose backorder in litres
  * 7. Bko_Noir (integer, >=0) = pinot noir backorder in litres
  *
@@ -177,10 +177,10 @@ public class functionCController {
 
     }
 
-    boolean isNonNegativeInteger(String s) {
+    boolean isPositiveInteger(String s) {
         try {
             int i = Integer.parseInt(s);
-            if (i >= 0) {
+            if (i >= 1) {
                 return true; //valid
             } else {
                 return false; //negative
@@ -190,10 +190,10 @@ public class functionCController {
         }
     }
 
-    boolean isNonNegativeFloat(String s) {
+    boolean isPositiveFloat(String s) {
         try {
             float i = Float.parseFloat(s);
-            if (i >= 0) {
+            if (i >= 1) {
                 //has more than two decimal places?
                 if (s.contains(".")) {
                     if (s.substring(s.indexOf(".")).length() > 3) {
@@ -238,7 +238,7 @@ public class functionCController {
         }
 
         //check if fields are in correct data type
-        else if (!isNonNegativeInteger(Bko_Noir.getText()) || !isNonNegativeInteger(Bko_Rose.getText()) || !isNonNegativeInteger(Cap_Grape.getText()) || !isNonNegativeInteger(Cap_Labor.getText()) || !isNonNegativeInteger(Num_Week.getText()) || !isNonNegativeFloat(Prc_Noir.getText()) || !isNonNegativeFloat(Prc_Rose.getText())) {
+        else if (!isPositiveInteger(Bko_Noir.getText()) || !isPositiveInteger(Bko_Rose.getText()) || !isPositiveInteger(Cap_Grape.getText()) || !isPositiveInteger(Cap_Labor.getText()) || !isPositiveInteger(Num_Week.getText()) || !isPositiveFloat(Prc_Noir.getText()) || !isPositiveFloat(Prc_Rose.getText())) {
             or_scroll_text1.setPromptText("W5: Please fill the text field with the proper format");
         }
 
@@ -335,7 +335,7 @@ public class functionCController {
 
                 try {
                     //check if it is a positive integer
-                    if (Integer.parseInt(t1) < 0) {
+                    if (Integer.parseInt(t1) <= 0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
@@ -362,7 +362,7 @@ public class functionCController {
 
                 try {
                     //check if it is a positive integer
-                    if (Integer.parseInt(t1) < 0) {
+                    if (Integer.parseInt(t1) <= 0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
@@ -444,11 +444,11 @@ public class functionCController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
                     //check if it is a positive float
-                    if (Float.parseFloat(newValue) < 0) {
+                    if (Float.parseFloat(newValue) < 1) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter a positive float");
+                        alert.setContentText("Please enter a positive float greater than 1");
                         alert.showAndWait();
                         Prc_Rose.setText("");
                     } else {
@@ -481,11 +481,11 @@ public class functionCController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
                     //check if it is a positive float
-                    if (Float.parseFloat(newValue) < 0) {
+                    if (Float.parseFloat(newValue) < 1) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter a positive number for the price.");
+                        alert.setContentText("Please enter a positive float greater than 1.");
                         alert.showAndWait();
                         Prc_Noir.setText("");
                     } else {

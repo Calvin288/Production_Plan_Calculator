@@ -72,6 +72,6 @@ public class functionC {
     public int getOptimizedRose() {return roseProduced;}
     public int getOptimizedNoir() {return noirProduced;}
     public int getOptimizedTotal() {return roseProduced+noirProduced;}
-    public double getOptimizedRevenue() {return maxRevenue;}
+    public int getOptimizedRevenue() {return (int)maxRevenue;}
     public boolean getBackorderFulfilled() {return backorderFulfilled;}
 }
