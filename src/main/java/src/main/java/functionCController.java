@@ -11,6 +11,36 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+/**
+ * <h1>Weekly Review with Revenue & Backorder</h1>
+ * <p>This is functionC of Group 7 COMP3111 Project Spring 2023</p>
+ * <p>Function C, i.e. The Weekly Review with Revenue & Backorder program, implements an
+ * application that finds the optimal combination of Rose and Pinot Noir.
+ * to maxmize revenue and meet backorder given labor and grape capacity
+ * constraints.</p>
+ * The user has 7 inputs in the interface:
+ * 1. Num_Week (integer, 23XX where 01<=XX<=15) = current week of the year
+ * 2. Cap_Labor (integer, >=1) = labor capacity in minutes
+ * 3. Cap_Grape (integer, >=1) = grape capacity in kg
+ * 4. Prc_Rose (float 2dp (9999.99), >=1) = price of rose per litre
+ * 5. Prc_Noir (float 2dp (9999.99), >=1) = price of pinot noir per litre
+ * 6. Bko_Rose (integer, >=0) = rose backorder in litres
+ * 7. Bko_Noir (integer, >=0) = pinot noir backorder in litres
+ *
+ * The function  will output the following:
+ * 1. Opt_Rose (integer) = optimal liters of rose to produce
+ * 2. Opt_Noir (integer) = optimal liters of pinot noir to produce
+ * 3. Opt_Total (integer) = optimal total liters to produce
+ * 4. Opt_Revenue (float 2dp (9999.99)) = optimal revenue resulted from the amount produced.
+ * 5. Bko_Fulfill ("Yes" or "No") = backorder fulfilled
+ * Along with these, it will output warnings if:
+ * 1. Insufficient production capacity to produce the optimal mix
+ * 2. Insufficient labor supplied to utilize the grape resource
+ * 3. Ratio of backorder volume is less than 70% of the optimal production volume
+ * @author  Nidhi Shah
+ * @version 1.0
+ * @since   2023-04-19
+ */
 public class functionCController {
 
     @FXML
@@ -147,10 +177,10 @@ public class functionCController {
 
     }
 
-    boolean isNonNegativeInteger(String s) {
+    boolean isPositiveInteger(String s) {
         try {
             int i = Integer.parseInt(s);
-            if (i >= 0) {
+            if (i >= 1) {
                 return true; //valid
             } else {
                 return false; //negative
@@ -160,10 +190,10 @@ public class functionCController {
         }
     }
 
-    boolean isNonNegativeFloat(String s) {
+    boolean isPositiveFloat(String s) {
         try {
             float i = Float.parseFloat(s);
-            if (i >= 0) {
+            if (i >= 1) {
                 //has more than two decimal places?
                 if (s.contains(".")) {
                     if (s.substring(s.indexOf(".")).length() > 3) {
@@ -195,29 +225,29 @@ public class functionCController {
     void toclick(ActionEvent event) {
         //run
         //list of warnings
-        ObservableList<String> warnings = FXCollections.observableArrayList("No warnings.","W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!","W2: Insufficient labor supplied to utilize the grape resource (less than 90%)!", "W3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!", "W4: Please fill all the required parameters", "W5: Please fill the text field with the proper format", "W6: Please fill the text field with the proper range");
-        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(warnings));
+        //ObservableList<String> warnings = FXCollections.observableArrayList("No warnings.","W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!","W2: Insufficient labor supplied to utilize the grape resource (less than 90%)!", "W3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!", "W4: Please fill all the required parameters", "W5: Please fill the text field with the proper format", "W6: Please fill the text field with the proper range");
+        //or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(warnings));
+
+        //first clear list of warnings from previous run:
+        or_scroll_text1.setPromptText(" ");
 
         //validate field inputs
         //check if any field is empty
         if (Bko_Noir.getText().isEmpty() || Bko_Rose.getText().isEmpty() || Cap_Grape.getText().isEmpty() || Cap_Labor.getText().isEmpty() || Num_Week.getText().isEmpty() || Prc_Noir.getText().isEmpty() || Prc_Rose.getText().isEmpty()) {
-            or_scroll_text1.getValueFactory().setValue("W4: Please fill all the required parameters");
+            or_scroll_text1.setPromptText("W4: Please fill all the required parameters");
         }
 
         //check if fields are in correct data type
-        else if (!isNonNegativeInteger(Bko_Noir.getText()) || !isNonNegativeInteger(Bko_Rose.getText()) || !isNonNegativeInteger(Cap_Grape.getText()) || !isNonNegativeInteger(Cap_Labor.getText()) || !isNonNegativeInteger(Num_Week.getText()) || !isNonNegativeFloat(Prc_Noir.getText()) || !isNonNegativeFloat(Prc_Rose.getText())) {
-            or_scroll_text1.getValueFactory().setValue("W5: Please fill the text field with the proper format");
+        else if (!isPositiveInteger(Bko_Noir.getText()) || !isPositiveInteger(Bko_Rose.getText()) || !isPositiveInteger(Cap_Grape.getText()) || !isPositiveInteger(Cap_Labor.getText()) || !isPositiveInteger(Num_Week.getText()) || !isPositiveFloat(Prc_Noir.getText()) || !isPositiveFloat(Prc_Rose.getText())) {
+            or_scroll_text1.setPromptText("W5: Please fill the text field with the proper format");
         }
-
-        //check for negative values
 
         //check if fields are within valid range
         else if (!isNumWeekCorrect(Num_Week.getText())) {
-            or_scroll_text1.getValueFactory().setValue("W6: Please fill the text field with the proper range");
+            or_scroll_text1.setPromptText("W6: Please fill the text field with the proper range");
         }
 
         //if no errors, calculate
-
         //Revenue = (Opt_Rose * Prc_Rose) + (Opt_Noir * Prc_Noir)
         else {
             //list of inputs
@@ -226,113 +256,265 @@ public class functionCController {
             int Cap_Grapes = Integer.parseInt(Cap_Grape.getText());
             int Cap_Labors = Integer.parseInt(Cap_Labor.getText());
             int Num_Weeks = Integer.parseInt(Num_Week.getText());
-            float Prc_Noirs = Float.parseFloat(Prc_Noir.getText());
-            float Prc_Roses = Float.parseFloat(Prc_Rose.getText());
+            double Prc_Noirs = Double.parseDouble(Prc_Noir.getText());
+            double Prc_Roses = Double.parseDouble(Prc_Rose.getText());
 
             //find max revenue and meet backorders
-            //list of outputs
-            double maxRevenue = 0;
-            int roseProduced = 0;
-            int noirProduced = 0;
-            int remainingLabour;
-            int remainingGrape;
-            boolean backorderFulfilled = false;
+            functionC opt = new functionC();
+            opt.optimize(Bcko_Rose, Bcko_Noir, Cap_Grapes, Cap_Labors, Num_Weeks, Prc_Noirs, Prc_Roses);
 
-            //constants
-            //5 minutes needed to produce rose and 12 minutes needed to produce p_noir
-            int LABOUR_PER_ROSE = 5;
-            int LABOUR_PER_NOIR = 12;
-            //6kgs of grapes needed for rose and 4kgs for noir
-            int GRAPE_PER_ROSE = 6;
-            int GRAPE_PER_NOIR = 4;
-            //max production capacity is 5000 litres per week
-            int MAX_PRODUCTION_CAPACITY = 5000;
-            //standard man power per head is 37.5 Man hours per week
-            double STANDARD_MANPOWER_PER_HEAD = 37.5;
-            //labor cost per week is $935; irrelevant
-            //int LABOUR_COST_PER_WEEK = 935;
-
-
-            //use 2-layer nested for loop to compute optimal mix of wines Opt_Rose and Opt_Noir to maximize Opt_Revenue
-            //Reserve all resource of both labor and grape to backorders first, then optimize remaining resource of both labor and grape capacity
-            //Sales Revenue = (Opt_Rose * Prc_Rose) + (Opt_Noir * Prc_Noir)
-
-            //reserve for backorder
-            remainingLabour = Cap_Labors - (Bcko_Noir * LABOUR_PER_NOIR + Bcko_Rose * LABOUR_PER_ROSE);
-            remainingGrape = Cap_Grapes - (Bcko_Noir * GRAPE_PER_NOIR + Bcko_Rose * GRAPE_PER_ROSE);
-            if (remainingLabour < 0 || remainingGrape < 0) {
-                //four cases: 1. only capacity for backorder of rose, 2. only capacity for backorder of noir, 3. no capacity for backorder of rose nor noir 4. capacity for either backorder of rose or noir
-
-                //optimize the backorders
-                remainingGrape = Cap_Grapes;
-                remainingLabour = Cap_Labors;
-                for (int i = 0; i <= Bcko_Rose; i++) {
-                    for (int j = 0; j <= Bcko_Noir; j++) {
-                        if (i * LABOUR_PER_ROSE + j * LABOUR_PER_NOIR <= Cap_Labors && i * GRAPE_PER_ROSE + j * GRAPE_PER_NOIR <= Cap_Grapes) {
-                            if (i * Prc_Roses + j * Prc_Noirs > maxRevenue) {
-                                maxRevenue = (i * Prc_Roses + j * Prc_Noirs);
-                                roseProduced = i;
-                                noirProduced = j;
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                backorderFulfilled = true;
-
-                //there is still capacity after backorders
-                //optimize with remaining capacity of labor and grape
-                for (int r = 0; r <= remainingLabour / LABOUR_PER_ROSE; r++) {
-                    for (int n = 0; n <= remainingLabour / LABOUR_PER_NOIR; n++) {
-                        if (r * LABOUR_PER_ROSE + n * LABOUR_PER_NOIR <= remainingLabour && r * GRAPE_PER_ROSE + n * GRAPE_PER_NOIR <= remainingGrape) {
-                            if (r * Prc_Roses + n * Prc_Noirs > maxRevenue) {
-                                maxRevenue = (r * Prc_Roses + n * Prc_Noirs);
-                                roseProduced = r;
-                                noirProduced = n;
-                            }
-                        }
-                    }
-                }
-                roseProduced += Bcko_Rose;
-                noirProduced += Bcko_Noir;
-            }
-
-            //display the result
-            //set the variables Opt_Rose, Opt_Noir, Opt_Total, Opt_Revenue, Bko_Fulfill
-            Opt_Rose.setText(Integer.toString(roseProduced));
-            Opt_Noir.setText(Integer.toString(noirProduced));
-            Opt_Total.setText(Integer.toString(roseProduced + noirProduced));
-            Opt_Revenue.setText(Integer.toString((int) (roseProduced * Prc_Roses + noirProduced * Prc_Noirs)));
+            Opt_Rose.setText(String.valueOf(opt.getOptimizedRose()));
+            Opt_Noir.setText(String.valueOf(opt.getOptimizedNoir()));
+            Opt_Total.setText(String.valueOf(opt.getOptimizedTotal()));
+            Opt_Revenue.setText(String.valueOf(opt.getOptimizedRevenue()));
             //format Bko_Fulfill as Yes / No
-            if (backorderFulfilled) {
+            if (opt.getBackorderFulfilled()) {
                 Bko_Fulfill.setText("Yes");
             }
             else {
                 Bko_Fulfill.setText("No");
             }
 
-
             //abnormal situations:
-            // If Actual Production Capacity < Rose + Opt_Noir, show: "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!"
-            if (roseProduced + noirProduced > MAX_PRODUCTION_CAPACITY) {
-                or_scroll_text1.getValueFactory().setValue("w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!");
+            String warnings ="";
+            int MAX_PRODUCTION_CAPACITY = 5000;
+            int GRAPE_PER_ROSE = 6;
+            int GRAPE_PER_NOIR = 4;
+            // If Actual Production Capacity < Opt_Rose + Opt_Noir, show: "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!"
+            if (opt.getOptimizedTotal() > MAX_PRODUCTION_CAPACITY) {
+                warnings+="w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
             }
 
             //After optimizing product mix, if consumption of grapes is <90% of given capacity due to insufficient labor supplied, show warning "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!"
-            if ((roseProduced * GRAPE_PER_ROSE + noirProduced * GRAPE_PER_NOIR) < (0.9* Cap_Grapes)) {
-                or_scroll_text1.getValueFactory().setValue("w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!");
+            if ((opt.getOptimizedRose() * GRAPE_PER_ROSE + opt.getOptimizedNoir() * GRAPE_PER_NOIR) < (0.9* Cap_Grapes)) {
+                warnings+="w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r";
             }
 
             //If (Bko_Rose + Bko_Noir) < 70% (Opt_Rose + Opt_Noir), show warning: "w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!".
-            if (Bcko_Rose + Bcko_Noir < 0.7 * (roseProduced + noirProduced)) {
-                or_scroll_text1.getValueFactory().setValue("w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!");
+            if ((Bcko_Rose + Bcko_Noir) < (0.7 * (opt.getOptimizedTotal()))) {
+                warnings+="w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!\r";
             }
-
+            or_scroll_text1.setPromptText(warnings);
         }
     }
 
-    public void initialize() {}
+    public void initialize() {
+        Num_Week.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (    (Integer.parseInt(newValue) < 10 && Integer.parseInt(newValue)!=2) ||
+                            ((Integer.parseInt(newValue) >=10 && Integer.parseInt(newValue) < 100) && Integer.parseInt(newValue)!=23) ||
+                            ((Integer.parseInt(newValue) >=100 && Integer.parseInt(newValue) < 1000) && (Integer.parseInt(newValue)!=230 && Integer.parseInt(newValue)!=231)) ||
+                            (Integer.parseInt(newValue) >=1000) && (Integer.parseInt(newValue)<2301 || Integer.parseInt(newValue)>2315)
+                    ) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer between 2301 and 2315");
+                        alert.showAndWait();
+                        Num_Week.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter the number between 2301 and 2315");
+                    alert.showAndWait();
+                    Num_Week.setText("");
+                }
+            }
+        });
+
+        //Capacities
+
+        //Cap_Grape
+        Cap_Grape.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+                try {
+                    //check if it is a positive integer
+                    if (Integer.parseInt(t1) <= 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive integer for the grape capacity.");
+                        alert.showAndWait();
+                        Cap_Grape.setText("");
+                    } else {
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a positive integer for the grape capacity.");
+                    alert.showAndWait();
+                    Cap_Grape.setText("");
+                }
+            }
+        });
+
+        //Cap_Labor
+        Cap_Labor.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+                try {
+                    //check if it is a positive integer
+                    if (Integer.parseInt(t1) <= 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive integer for the labor capacity.");
+                        alert.showAndWait();
+                        Cap_Labor.setText("");
+                    } else {
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a positive integer for the labor capacity.");
+                    alert.showAndWait();
+                    Cap_Labor.setText("");
+                }
+            }
+        });
+
+        //Backorders
+        //Bko_Rose
+        Bko_Rose.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+
+                try {
+                    //check if it is a positive integer
+                    if (Integer.parseInt(t1) < 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive integer for the Rose backorder.");
+                        alert.showAndWait();
+                        Bko_Rose.setText("");
+                    } else {
+                    }
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a positive integer for the Rose backorder.");
+                    alert.showAndWait();
+                    Bko_Rose.setText("");
+                }
+            }
+        });
+
+        //Bko_Noir
+        Bko_Noir.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                try {
+                    //check it's a non-negative integer
+                    if (Integer.parseInt(t1) < 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive integer for the Noir backorder.");
+                        alert.showAndWait();
+                        Bko_Noir.setText("");
+                    } else {
+                    }
+                }
+                catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a positive integer for the Noir backorder.");
+                    alert.showAndWait();
+                    Bko_Noir.setText("");
+                }
+            }
+        });
+
+
+        //Prices
+        Prc_Rose.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    //check if it is a positive float
+                    if (Float.parseFloat(newValue) < 1) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive float greater than 1");
+                        alert.showAndWait();
+                        Prc_Rose.setText("");
+                    } else {
+                        //If it is a decimal, it should have no more than 2 decimal places
+                        if (newValue.contains(".")) {
+                            if (newValue.substring(newValue.indexOf(".") + 1).length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter a number with no more than 2 decimal places");
+                                alert.showAndWait();
+                                Prc_Rose.setText("");
+                            }
+                        }
+                    }
+
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a positive number for the price");
+                    alert.showAndWait();
+                    Prc_Rose.setText("");
+                }
+            }
+        });
+
+        Prc_Noir.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    //check if it is a positive float
+                    if (Float.parseFloat(newValue) < 1) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a positive float greater than 1.");
+                        alert.showAndWait();
+                        Prc_Noir.setText("");
+                    } else {
+                        //If it is a decimal, it should have no more than 2 decimal places
+                        if (newValue.contains(".")) {
+                            if (newValue.substring(newValue.indexOf(".") + 1).length() > 2) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter a number with no more than 2 decimal places");
+                                alert.showAndWait();
+                                Prc_Noir.setText("");
+                            }
+                        }
+                    }
+
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter a number for the price.");
+                    alert.showAndWait();
+                    Prc_Noir.setText("");
+                }
+            }
+        });
+        //end of input validation
+    }
+
     @FXML
     void toexit(ActionEvent event) {
         Main.stage.setScene(Main.scene);
