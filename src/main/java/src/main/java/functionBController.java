@@ -12,14 +12,30 @@ import javafx.scene.shape.Line;
 import javax.swing.*;
 
 /**
- * <p>The Weekly Review that concerns Revenue program implements an
- * application that finds the optimal combination of Rose and Pinot Noir.
- * to maximise revenue
- * constraints.</p>
+ * <h1>Production Plan Calculator</h1>
+ *
+ * This is the functionB of Group 7 COMP3111 Project Spring 2023
+ * Function B is used to compute the optimal mix of wines
+ * produced durinf a certain week of year to maximize revenue for the winery
+ *
+ * The user have 5 inputs in the unit interface:
+ * 1. WeekOfYear (integer, 2300 < x < 2316) = Harvest Week
+ * 2. Cap_Labor (integer) = labor resource planned for the production cycle
+ * 3. Cap_Grape (integer) = grape resource planned for the production cycle
+ * 4. Prc_Rose (double, x.xx format) = price of rose wine
+ * 5. Prc_Noir (double, x.xx format) = price of pinot-noir wine
+ *
+ * The function will output the following:
+ * 1. optRose = the optimal amount of rose wine production in litres
+ * 2. optNoir = the optimal amount of pinot-noir wine production in litres
+ * 3. totalGrapes = the sum of optRose and optNoir
+ * 4. optRevenue = the optimal revenue
+ * 3. surGrape = the optimized total gross profit before tax could be generated for the year
+ * 4. surLabor = the optimized profit margin in x.x% format
  *
  * @author  Calvin Wiogo
  * @version 1.0
- * @since   2023-04-19
+ * @since   2023-04-30
  */
 
 public class functionBController {
@@ -221,7 +237,15 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    Integer.parseInt(newValue);
+                    if(Integer.parseInt(newValue) <= 0)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.showAndWait();
+                        Cap_Grape.setText("");
+                    }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
@@ -237,7 +261,15 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    Integer.parseInt(newValue);
+                    if(Integer.parseInt(newValue) <= 0)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter an integer greater than 0");
+                        alert.showAndWait();
+                        Cap_Labor.setText("");
+                    }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
@@ -253,7 +285,15 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    Float.parseFloat(newValue);
+                    if(Float.parseFloat(newValue) <= 0)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a float greater than 0");
+                        alert.showAndWait();
+                        Prc_Rose.setText("");
+                    }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
@@ -269,7 +309,15 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    Float.parseFloat(newValue);
+                    if(Float.parseFloat(newValue) <= 0)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText("input error");
+                        alert.setContentText("Please enter a float greater than 0");
+                        alert.showAndWait();
+                        Prc_Noir.setText("");
+                    }
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
@@ -289,56 +337,36 @@ public class functionBController {
 
     @FXML
     void toclick(ActionEvent event) {
-        int optimalRevenue = 0;
-        int optimalRose = 0;
-        int optimalNoir = 0;
-        double prcRose = Math.round(Float.parseFloat(Prc_Rose.textProperty().getValue())*100.0) /100.0;
-        double prcNoir = Math.round(Float.parseFloat(Prc_Noir.textProperty().getValue())*100.0) /100.0;
-        int capLabour =  Integer.parseInt(Cap_Labor.textProperty().getValue());
-        int capGrape = Integer.parseInt(Cap_Grape.textProperty().getValue());
-        int maxRFromLabor = capLabour/5;
-        int maxRFromGrape = capGrape/6;
-        int maxR = maxRFromLabor > maxRFromGrape ? maxRFromGrape : maxRFromLabor;
-        int maxPFromLabor = capLabour/12;
-        int maxPFromGrape = capGrape/4;
-        int maxP = maxPFromLabor > maxPFromGrape ? maxPFromGrape : maxPFromLabor;
+        int num_week = Integer.parseInt(WeekOfYear.getText());
+        int input_capLabor = Integer.parseInt(Cap_Labor.getText());
+        int input_capGrape = Integer.parseInt(Cap_Grape.getText());
+        double input_prcRose = Double.parseDouble(Prc_Rose.getText());
+        double input_prcNoir = Double.parseDouble(Prc_Noir.getText());
 
-        for(int optimalR = 0; optimalR <= maxR; optimalR++)
-        {
-            for(int optimalP = 0; optimalP <= maxP; optimalP++)
-            {
-                if(optimalR * 5 + optimalP * 12 > capLabour || 6 * optimalR + 4 * optimalP > capGrape)
-                    break;
-                if(optimalR * prcRose + optimalP * prcNoir > optimalRevenue){
-                    optimalRevenue = (int) (optimalR * prcRose + optimalP * prcNoir);
-                    optimalRose = optimalR;
-                    optimalNoir = optimalP;
-                }
-            }
-        }
+        functionB opt = new functionB();
+        opt.optimize(num_week, input_capLabor, input_capGrape, input_prcRose, input_prcNoir);
 
-        int surLabor = capLabour - (optimalRose * 5 + optimalNoir * 12);
-        if(surLabor>0 && surLabor <5)
-            surLabor = 0;
-        int surGrape = capGrape - (optimalRose * 6 + optimalNoir * 4);
-        if(surGrape >0 && surGrape <4)
-            surGrape = 0;
-
+        int optimalRose = opt.getOptimizedRose();
+        int optimalNoir = opt.getOptimizedNoir();
+        int optimalRevenue =opt.getOptimizedRevenue();
+        int surGrape = opt.getGrapeSurplus();
+        int surLabor = opt.getLaborSurplus();
+        int totalGrapes = opt.getOptimizedTotal();
 
         String outputPrompt = "";
-        if((optimalRose + optimalNoir) > 5000)
+        if ((optimalRose + optimalNoir) > 5000)
             outputPrompt += "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
-        if((float) surGrape/capGrape >= 0.1)
+        if ((float) surGrape / input_capGrape >= 0.1)
             outputPrompt += "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r";
-        if(surLabor < 0)
+        if (surLabor < 0)
             outputPrompt += "Er1a: Program bug is occurred, Labor Consumption cannot greater than its capacity!\r";
-        if(surGrape < 0)
+        if (surGrape < 0)
             outputPrompt += "Er1b: Program bug is occurred, Grape Consumption cannot greater than its capacity!\r";
 
         or_scroll_text1.setPromptText(outputPrompt);
         or_Prod_Vol_Rose.setText(String.valueOf(optimalRose));
         or_Prod_Vol_Noir.setText(String.valueOf(optimalNoir));
-        or_Prod_Vol_Total.setText(String.valueOf(optimalRose + optimalNoir));
+        or_Prod_Vol_Total.setText(String.valueOf(totalGrapes));
         or_Total_Revenue.setText(String.valueOf(optimalRevenue));
         or_Labor_Surplus.setText(String.valueOf(surLabor));
         or_Grape_Surplus.setText(String.valueOf(surGrape));
