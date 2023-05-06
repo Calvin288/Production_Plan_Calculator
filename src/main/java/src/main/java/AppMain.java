@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 
 /**
- * <h1>PPC1 Calculator</h1>
+ * PPC1 Calculator
  * This document calculates the optimal production mix of Rose and Pinot Noir in three categories:
  * 1. Annual Forecast maximizing Gross Profit
  * 2. Weekly Review maximizing Revenue
