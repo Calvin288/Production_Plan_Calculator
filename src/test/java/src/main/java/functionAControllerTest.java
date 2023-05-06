@@ -1,73 +1,63 @@
 package src.main.java;
 
-
-import javafx.event.ActionEvent;
-import javafx.scene.control.TextField;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import javafx.application.Platform;
 
-class functionAControllerTester {
-    @BeforeAll
-    static void initJfxRuntime() {
-        Platform.startup(() -> {});
-    }
-
-    functionAController fAController = new functionAController();
-
+class functionATest {
     @Test
     public void normalInputs() throws Exception {
+        int num_Week = 1;
+        int capLabor = 28500;
+        int capGrape = 28500;
+        double prcRose = 12.5;
+        double prcNoir = 23.5;
+        int fixedCosts = 50000;
 
-        TextField num_Week = new TextField();
-        num_Week.setText("1");
-        TextField capLabor = new TextField();
-        capLabor.setText("28500");
-        TextField capGrape = new TextField();
-        capGrape.setText("28500");
-        TextField prcRose = new TextField();
-        prcRose.setText("12.5");
-        TextField prcNoir = new TextField();
-        prcNoir.setText("23.5");
-        TextField fixedCosts = new TextField();
-        fixedCosts.setText("50000");
+        functionA test = new functionA();
+        test.optimize(num_Week, capLabor, capGrape, prcRose, prcNoir, fixedCosts);
 
-        fAController.setUp(num_Week, capGrape, capLabor, prcNoir, prcRose, fixedCosts);
-        fAController.toclick(new ActionEvent());
-        assertEquals(fAController.getProdVolRose(), "4384");
-        assertEquals(fAController.getProdVolNoir(), "548");
-        assertEquals(fAController.getProdVolTotal(), "4932");
-        assertEquals(fAController.getGrossProfit(), "8302");
-        assertEquals(fAController.getProfitMargin(), "11.8");
+        assertEquals(test.getOptimizedRose(), 4384);
+        assertEquals(test.getOptimizedNoir(), 548);
+        assertEquals(test.getOptimizedTotal(), 4932);
+        assertEquals(test.getOptimizedProfit(), 5836);
+        assertEquals(test.getOptimizedMargin(), 8.6);
     }
+
     @Test
-    public void exceedCap() throws Exception {
+    public void abnormalLabor() throws Exception {
+        int num_Week = 12;
+        int capLabor = 2850000;
+        int capGrape = 50000;
+        double prcRose = 12.5;
+        double prcNoir = 23.5;
+        int fixedCosts = 5000000;
 
-        TextField num_Week = new TextField();
-        num_Week.setText("12");
-        TextField capLabor = new TextField();
-        capLabor.setText("2850000");
-        TextField capGrape = new TextField();
-        capGrape.setText("50000");
-        TextField prcRose = new TextField();
-        prcRose.setText("12.5");
-        TextField prcNoir = new TextField();
-        prcNoir.setText("23.5");
-        TextField fixedCosts = new TextField();
-        fixedCosts.setText("5000000");
+        functionA test = new functionA();
+        test.optimize(num_Week, capLabor, capGrape, prcRose, prcNoir, fixedCosts);
 
-        fAController.setUp(num_Week, capGrape, capLabor, prcNoir, prcRose, fixedCosts);
-        fAController.toclick(new ActionEvent());
-        assertEquals(fAController.getProdVolRose(), "0");
-        assertEquals(fAController.getProdVolNoir(), "150000");
-        assertEquals(fAController.getProdVolTotal(), "150000");
-        assertEquals(fAController.getGrossProfit(), "-2148000");
-        assertEquals(fAController.getProfitMargin(), "-59.6");
+        assertEquals(test.getOptimizedRose(), 0);
+        assertEquals(test.getOptimizedNoir(), 150000);
+        assertEquals(test.getOptimizedTotal(), 150000);
+        assertEquals(test.getOptimizedProfit(), -2223000);
+        assertEquals(test.getOptimizedMargin(), -63.0);
     }
-    /*@Test
-    public void alert1() throws Exception {
-        TextField num_Week = new TextField();
-        num_Week.setText("12");
-        verifyThat("OK", NodeMatchers.isVisible());
-    }*/
+
+    @Test
+    public void abnormalPrice() throws Exception {
+        int num_Week = 3;
+        int capLabor = 1200;
+        int capGrape = 1400;
+        double prcRose = 1200;
+        double prcNoir = 5;
+        int fixedCosts = 10000;
+
+        functionA test = new functionA();
+        test.optimize(num_Week, capLabor, capGrape, prcRose, prcNoir, fixedCosts);
+
+        assertEquals(test.getOptimizedRose(), 699);
+        assertEquals(test.getOptimizedNoir(), 0);
+        assertEquals(test.getOptimizedTotal(), 699);
+        assertEquals(test.getOptimizedProfit(), 827347);
+        assertEquals(test.getOptimizedMargin(), 98.6);
+    }
 }
