@@ -123,4 +123,26 @@ class functionCTest {
                 () -> assertEquals(false, test.getBackorderFulfilled())
         );
     }
+
+    @Test
+    public void doubleDPPrice() throws Exception {
+        int weekOfYear = 2301;
+        int capLabor = 45000;
+        int capGrape = 450000;
+        double prcRose = 12.25;
+        double prcNoir = 23.19;
+        int BkoRose = 700;
+        int BkoNoir = 200;
+
+        functionC test = new functionC();
+        test.optimize(BkoRose,BkoNoir, capGrape, capLabor, weekOfYear,prcNoir,prcRose);
+
+        assertAll(
+                () -> assertEquals(8520, test.getOptimizedRose()),
+                () -> assertEquals(200, test.getOptimizedNoir()),
+                () -> assertEquals(8720, test.getOptimizedTotal()),
+                () -> assertEquals(109008, test.getOptimizedRevenue()),
+                () -> assertEquals(true, test.getBackorderFulfilled())
+        );
+    }
 }

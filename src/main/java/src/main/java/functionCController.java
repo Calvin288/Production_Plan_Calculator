@@ -280,19 +280,19 @@ public class functionCController {
             int MAX_PRODUCTION_CAPACITY = 5000;
             int GRAPE_PER_ROSE = 6;
             int GRAPE_PER_NOIR = 4;
-            // If Actual Production Capacity < Rose + Opt_Noir, show: "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!"
+            // If Actual Production Capacity < Opt_Rose + Opt_Noir, show: "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!"
             if (opt.getOptimizedTotal() > MAX_PRODUCTION_CAPACITY) {
                 warnings+="w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
             }
 
             //After optimizing product mix, if consumption of grapes is <90% of given capacity due to insufficient labor supplied, show warning "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!"
             if ((opt.getOptimizedRose() * GRAPE_PER_ROSE + opt.getOptimizedNoir() * GRAPE_PER_NOIR) < (0.9* Cap_Grapes)) {
-                or_scroll_text1.getValueFactory().setValue("w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r");
+                warnings+="w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r";
             }
 
             //If (Bko_Rose + Bko_Noir) < 70% (Opt_Rose + Opt_Noir), show warning: "w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!".
-            if (Bcko_Rose + Bcko_Noir < 0.7 * (opt.getOptimizedTotal())) {
-                or_scroll_text1.getValueFactory().setValue("w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!\r");
+            if ((Bcko_Rose + Bcko_Noir) < (0.7 * (opt.getOptimizedTotal()))) {
+                warnings+="w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!\r";
             }
             or_scroll_text1.setPromptText(warnings);
         }
