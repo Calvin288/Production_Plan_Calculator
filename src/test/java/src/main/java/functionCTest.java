@@ -38,22 +38,89 @@ class functionCTest {
     public void normalInputBackorderFulfilled() throws Exception {
 
         int weekOfYear = 2301;
-        int capGrape = 12000;
-        int capLabor = 5000;
-        double prcNoir = 12.5;
+        int capLabor = 12000;
+        int capGrape = 5000;
         double prcRose = 23.5;
-        int BkoNoir = 380;
+        double prcNoir = 12.5;
         int BkoRose = 180;
+        int BkoNoir = 380;
 
         functionC test = new functionC();
         test.optimize(BkoRose,BkoNoir, capGrape, capLabor, weekOfYear,prcNoir,prcRose);
 
         assertAll(
-                () -> assertEquals(test.getOptimizedRose(), 380),
-                () -> assertEquals(test.getOptimizedNoir(), 680),
-                () -> assertEquals(test.getOptimizedTotal(), 10060),
-                () -> assertEquals(test.getOptimizedRevenue(), 5000),
-                () -> assertEquals(test.getBackorderFulfilled(), true)
+                () -> assertEquals(580, test.getOptimizedRose()),
+                () -> assertEquals(380, test.getOptimizedNoir()),
+                () -> assertEquals(960, test.getOptimizedTotal()),
+                () -> assertEquals(18380, test.getOptimizedRevenue()),
+                () -> assertEquals(true, test.getBackorderFulfilled())
+        );
+    }
+
+
+    @Test
+    public void abnormalPrice() throws Exception {
+        int weekOfYear = 2301;
+        int capLabor = 12000;
+        int capGrape = 5000;
+        double prcRose = 20;
+        double prcNoir = 10;
+        int BkoRose = 180;
+        int BkoNoir = 380;
+
+        functionC test = new functionC();
+        test.optimize(BkoRose,BkoNoir, capGrape, capLabor, weekOfYear,prcNoir,prcRose);
+
+        assertAll(
+                () -> assertEquals(580, test.getOptimizedRose()),
+                () -> assertEquals(380, test.getOptimizedNoir()),
+                () -> assertEquals(960, test.getOptimizedTotal()),
+                () -> assertEquals(15400, test.getOptimizedRevenue()),
+                () -> assertEquals(true, test.getBackorderFulfilled())
+        );
+    }
+
+    @Test
+    public void tooMuchCapacity() throws Exception {
+        int weekOfYear = 2301;
+        int capLabor = 72000;
+        int capGrape = 45000;
+        double prcRose = 12.5;
+        double prcNoir = 23.5;
+        int BkoRose = 3500;
+        int BkoNoir = 2800;
+
+        functionC test = new functionC();
+        test.optimize(BkoRose,BkoNoir, capGrape, capLabor, weekOfYear,prcNoir,prcRose);
+
+        assertAll(
+                () -> assertEquals(4845, test.getOptimizedRose()),
+                () -> assertEquals(3981, test.getOptimizedNoir()),
+                () -> assertEquals(8826, test.getOptimizedTotal()),
+                () -> assertEquals(154116, test.getOptimizedRevenue()),
+                () -> assertEquals(true, test.getBackorderFulfilled())
+        );
+    }
+
+    @Test
+    public void backOrderNotFulfilled() throws Exception {
+        int weekOfYear = 2301;
+        int capLabor = 12000;
+        int capGrape = 5000;
+        double prcRose = 12.5;
+        double prcNoir = 23.5;
+        int BkoRose = 3500;
+        int BkoNoir = 2800;
+
+        functionC test = new functionC();
+        test.optimize(BkoRose,BkoNoir, capGrape, capLabor, weekOfYear,prcNoir,prcRose);
+
+        assertAll(
+                () -> assertEquals(230, test.getOptimizedRose()),
+                () -> assertEquals(904, test.getOptimizedNoir()),
+                () -> assertEquals(1134, test.getOptimizedTotal()),
+                () -> assertEquals(24119, test.getOptimizedRevenue()),
+                () -> assertEquals(false, test.getBackorderFulfilled())
         );
     }
 }

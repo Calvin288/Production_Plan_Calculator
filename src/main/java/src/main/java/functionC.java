@@ -1,7 +1,6 @@
 package src.main.java;
 
 public class functionC {
-
     //Fixed given values
     int LABOUR_PER_ROSE = 5;
     int LABOR_PER_NOIR = 12;
@@ -30,16 +29,15 @@ public class functionC {
         //reserve for backorder
         remainingLabour = Cap_Labors - (Bcko_Noir * LABOR_PER_NOIR + Bcko_Rose * LABOUR_PER_ROSE);
         remainingGrape = Cap_Grapes - (Bcko_Noir * GRAPE_PER_NOIR + Bcko_Rose * GRAPE_PER_ROSE);
-        //A: If the backorders cannot be met.
+        //A: If the backorders cannot be met:
         if (remainingLabour < 0 || remainingGrape < 0) {
-            //four cases: 1. only capacity for backorder of rose, 2. only capacity for backorder of noir, 3. no capacity for backorder of rose nor noir 4. capacity for either backorder of rose or noir
-
-            //optimize the backorders
+            backorderFulfilled = false;
+            //optimize revenue from the backorders
             remainingGrape = Cap_Grapes;
             remainingLabour = Cap_Labors;
             for (int i = 0; i <= Bcko_Rose; i++) {
                 for (int j = 0; j <= Bcko_Noir; j++) {
-                    if (i * LABOUR_PER_ROSE + j * LABOR_PER_NOIR <= Cap_Labors && i * GRAPE_PER_ROSE + j * GRAPE_PER_NOIR <= Cap_Grapes) {
+                    if (((i * LABOUR_PER_ROSE + j * LABOR_PER_NOIR) <= Cap_Labors) && ((i * GRAPE_PER_ROSE + j * GRAPE_PER_NOIR) <= Cap_Grapes)) {
                         if (i * Prc_Roses + j * Prc_Noirs > maxRevenue) {
                             maxRevenue = (i * Prc_Roses + j * Prc_Noirs);
                             roseProduced = i;
@@ -54,10 +52,10 @@ public class functionC {
             backorderFulfilled = true;
             //there is still capacity after backorders
             //optimize with remaining capacity of labor and grape
-            for (int r = 0; r <= remainingLabour / LABOUR_PER_ROSE; r++) {
-                for (int n = 0; n <= remainingLabour / LABOR_PER_NOIR; n++) {
-                    if (r * LABOUR_PER_ROSE + n * LABOR_PER_NOIR <= remainingLabour && r * GRAPE_PER_ROSE + n * GRAPE_PER_NOIR <= remainingGrape) {
-                        if (r * Prc_Roses + n * Prc_Noirs > maxRevenue) {
+            for (int r = 0; r <= (remainingLabour / LABOUR_PER_ROSE); r++) {
+                for (int n = 0; n <= (remainingLabour / LABOR_PER_NOIR); n++) {
+                    if (((r * LABOUR_PER_ROSE + n * LABOR_PER_NOIR) <= remainingLabour) && ((r * GRAPE_PER_ROSE + n * GRAPE_PER_NOIR) <= remainingGrape)) {
+                        if ((r * Prc_Roses + n * Prc_Noirs) > maxRevenue) {
                             maxRevenue = (r * Prc_Roses + n * Prc_Noirs);
                             roseProduced = r;
                             noirProduced = n;
@@ -67,12 +65,9 @@ public class functionC {
             }
             roseProduced += Bcko_Rose;
             noirProduced += Bcko_Noir;
+            maxRevenue = (roseProduced * Prc_Roses + noirProduced * Prc_Noirs);
         }
     }
-
-
-
-
     //Public functions
     public int getOptimizedRose() {return roseProduced;}
     public int getOptimizedNoir() {return noirProduced;}
