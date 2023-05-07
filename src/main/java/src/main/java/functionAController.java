@@ -11,25 +11,23 @@ import javafx.scene.shape.Line;
 
 
 /**
- * <h1>Production Plan Calculator</h1>
  *
- * This is the functionA of Group 7 COMP3111 Project Spring 2023
  * Function A is used to help the user in computing the optimal mix of wines
- * to be produced in the year for maximizing the gross profit for the winery
+ * to be produced in the year for maximizing the gross profit for the winery<br><br>
  *
- * The user have 6 inputs in the unit interface:
- * 1. Num_Week (integer, 0 < x < 15) = number of weeks to be estimated for the harvest season
- * 2. Cap_Labor (integer) = labor resource planned for the production cycle
- * 3. Cap_Grape (integer) = grape resource planned for the production cycle
- * 4. Prc_Rose (double, x.xx format) = price of rose wine
- * 5. Prc_Noir (double, x.xx format) = price of pinot-noir wine
- * 6. Fixed_Costs (integer) = total fixed costs of operating and manufacturing overheads
+ * The user have 6 inputs in the unit interface:<br>
+ * 1. Num_Week (integer) = number of weeks to be estimated for the harvest season<br>
+ * 2. Cap_Labor (integer) = labor resource planned for the production cycle<br>
+ * 3. Cap_Grape (integer) = grape resource planned for the production cycle<br>
+ * 4. Prc_Rose (double) = price of rose wine<br>
+ * 5. Prc_Noir (double) = price of pinot-noir wine<br>
+ * 6. Fixed_Costs (integer) = total fixed costs of operating and manufacturing overheads<br><br>
  *
- * The function will output the following:
- * 1. Opt_Rose = the optimal amount of rose wine production in litres
- * 2. Opt_Noir = the optimal amount of pinot-noir wine production in litres
- * 3. Opt_Profit = the optimized total gross profit before tax could be generated for the year
- * 4. Opt_Margin = the optimized profit margin in x.x% format
+ * The function will output the following:<br>
+ * 1. Opt_Rose = the optimal amount of rose wine production in litres<br>
+ * 2. Opt_Noir = the optimal amount of pinot-noir wine production in litres<br>
+ * 3. Opt_Profit = the optimized total gross profit before tax could be generated for the year<br>
+ * 4. Opt_Margin = the optimized profit margin in x.x% format<br>
  *
  * @author  Albertus Alexander
  * @version 1.0

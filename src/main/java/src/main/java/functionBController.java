@@ -12,26 +12,24 @@ import javafx.scene.shape.Line;
 import javax.swing.*;
 
 /**
- * <h1>Production Plan Calculator</h1>
  *
- * This is the functionB of Group 7 COMP3111 Project Spring 2023
- * Function B is used to compute the optimal mix of wines
- * produced durinf a certain week of year to maximize revenue for the winery
+ * Function B is used to compute the optimal mix of wines (rose and pinot-noir wine)
+ * produced during a certain week of year to maximize revenue<br><br>
  *
- * The user have 5 inputs in the unit interface:
- * 1. WeekOfYear (integer, 2300 < x < 2316) = Harvest Week
- * 2. Cap_Labor (integer) = labor resource planned for the production cycle
- * 3. Cap_Grape (integer) = grape resource planned for the production cycle
- * 4. Prc_Rose (double, x.xx format) = price of rose wine
- * 5. Prc_Noir (double, x.xx format) = price of pinot-noir wine
+ * The user have 5 inputs in the unit interface:<br>
+ * 1. WeekOfYear (integer) = Harvest Week<br>
+ * 2. Cap_Labor (integer) = labor resource planned for the production cycle<br>
+ * 3. Cap_Grape (integer) = grape resource planned for the production cycle<br>
+ * 4. Prc_Rose (double, x.xx format) = price of rose wine<br>
+ * 5. Prc_Noir (double, x.xx format) = price of pinot-noir wine<br><br>
  *
- * The function will output the following:
- * 1. optRose = the optimal amount of rose wine production in litres
- * 2. optNoir = the optimal amount of pinot-noir wine production in litres
- * 3. totalGrapes = the sum of optRose and optNoir
- * 4. optRevenue = the optimal revenue
- * 3. surGrape = the optimized total gross profit before tax could be generated for the year
- * 4. surLabor = the optimized profit margin in x.x% format
+ * The function will output the following:<br>
+ * 1. optRose = the optimal amount of rose wine production in litres<br>
+ * 2. optNoir = the optimal amount of pinot-noir wine production in litres<br>
+ * 3. totalGrapes = the sum of optimal Rose and optimal P-Noir<br>
+ * 4. optRevenue = the optimal revenue<br>
+ * 5. surGrape = the grape surplus<br>
+ * 6. surLabor = the labor surplus<br>
  *
  * @author  Calvin Wiogo
  * @version 1.0
@@ -285,7 +283,7 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if(Float.parseFloat(newValue) <= 0)
+                    if(Double.parseDouble(newValue) <= 0)
                     {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
@@ -309,7 +307,7 @@ public class functionBController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if(Float.parseFloat(newValue) <= 0)
+                    if(Double.parseDouble(newValue) <= 0)
                     {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
@@ -335,41 +333,103 @@ public class functionBController {
 
     }
 
+    boolean isPositiveInteger(String s) {
+        try {
+            int i = Integer.parseInt(s);
+            if (i >= 1) {
+                return true; //valid
+            } else {
+                return false; //negative
+            }
+        } catch (NumberFormatException e) {
+            return false; //not an integer
+        }
+    }
+
+    boolean isPositiveFloat(String s) {
+        try {
+            float i = Float.parseFloat(s);
+            if (i >= 1) {
+                //has more than two decimal places?
+                if (s.contains(".")) {
+                    if (s.substring(s.indexOf(".")).length() > 3) {
+                        return false;
+                    }
+                }
+                return true; //otherwise valid
+            } else {
+                return false; //negative
+            }
+        } catch (NumberFormatException e) {
+            return false; //not a float
+        }
+    }
+
+    boolean isNumWeekCorrect(String s) {
+        try {
+            int i = Integer.parseInt(s);
+            if (i >= 2301 && i <= 2315) {
+                return true; //valid
+            } else {
+                return false; //out of range
+            }
+        } catch (NumberFormatException e) {
+            return false; //not an integer
+        }
+    }
+
     @FXML
     void toclick(ActionEvent event) {
-        int num_week = Integer.parseInt(WeekOfYear.getText());
-        int input_capLabor = Integer.parseInt(Cap_Labor.getText());
-        int input_capGrape = Integer.parseInt(Cap_Grape.getText());
-        double input_prcRose = Double.parseDouble(Prc_Rose.getText());
-        double input_prcNoir = Double.parseDouble(Prc_Noir.getText());
+        or_scroll_text1.setPromptText(" ");
 
-        functionB opt = new functionB();
-        opt.optimize(num_week, input_capLabor, input_capGrape, input_prcRose, input_prcNoir);
+        if (Cap_Grape.getText().isEmpty() || Cap_Labor.getText().isEmpty()|| Prc_Noir.getText().isEmpty() || Prc_Rose.getText().isEmpty()) {
+            or_scroll_text1.setPromptText("W4: Please fill all the required parameters");
+        }
 
-        int optimalRose = opt.getOptimizedRose();
-        int optimalNoir = opt.getOptimizedNoir();
-        int optimalRevenue =opt.getOptimizedRevenue();
-        int surGrape = opt.getGrapeSurplus();
-        int surLabor = opt.getLaborSurplus();
-        int totalGrapes = opt.getOptimizedTotal();
+        //check if fields are in correct data type
+        else if ( !isPositiveInteger(Cap_Grape.getText()) || !isPositiveInteger(Cap_Labor.getText()) || !isPositiveFloat(Prc_Noir.getText()) || !isPositiveFloat(Prc_Rose.getText())) {
+            or_scroll_text1.setPromptText("W5: Please fill the text field with the proper format");
+        }
 
-        String outputPrompt = "";
-        if ((optimalRose + optimalNoir) > 5000)
-            outputPrompt += "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
-        if ((float) surGrape / input_capGrape >= 0.1)
-            outputPrompt += "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r";
-        if (surLabor < 0)
-            outputPrompt += "Er1a: Program bug is occurred, Labor Consumption cannot greater than its capacity!\r";
-        if (surGrape < 0)
-            outputPrompt += "Er1b: Program bug is occurred, Grape Consumption cannot greater than its capacity!\r";
+        //check if fields are within valid range
+        else if (!isNumWeekCorrect(WeekOfYear.getText())) {
+            or_scroll_text1.setPromptText("W6: Please fill the text field with the proper range");
+        }
+        else {
+            int num_week = Integer.parseInt(WeekOfYear.getText());
+            int input_capLabor = Integer.parseInt(Cap_Labor.getText());
+            int input_capGrape = Integer.parseInt(Cap_Grape.getText());
+            double input_prcRose = Double.parseDouble(Prc_Rose.getText());
+            double input_prcNoir = Double.parseDouble(Prc_Noir.getText());
 
-        or_scroll_text1.setPromptText(outputPrompt);
-        or_Prod_Vol_Rose.setText(String.valueOf(optimalRose));
-        or_Prod_Vol_Noir.setText(String.valueOf(optimalNoir));
-        or_Prod_Vol_Total.setText(String.valueOf(totalGrapes));
-        or_Total_Revenue.setText(String.valueOf(optimalRevenue));
-        or_Labor_Surplus.setText(String.valueOf(surLabor));
-        or_Grape_Surplus.setText(String.valueOf(surGrape));
+            functionB opt = new functionB();
+            opt.optimize(num_week, input_capLabor, input_capGrape, input_prcRose, input_prcNoir);
+
+            int optimalRose = opt.getOptimizedRose();
+            int optimalNoir = opt.getOptimizedNoir();
+            int optimalRevenue = opt.getOptimizedRevenue();
+            int surGrape = opt.getGrapeSurplus();
+            int surLabor = opt.getLaborSurplus();
+            int totalGrapes = opt.getOptimizedTotal();
+
+            String outputPrompt = "";
+            if ((optimalRose + optimalNoir) > 5000)
+                outputPrompt += "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!\r";
+            if ((float) surGrape / input_capGrape >= 0.1)
+                outputPrompt += "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!\r";
+            if (surLabor < 0)
+                outputPrompt += "Er1a: Program bug is occurred, Labor Consumption cannot greater than its capacity!\r";
+            if (surGrape < 0)
+                outputPrompt += "Er1b: Program bug is occurred, Grape Consumption cannot greater than its capacity!\r";
+
+            or_scroll_text1.setPromptText(outputPrompt);
+            or_Prod_Vol_Rose.setText(String.valueOf(optimalRose));
+            or_Prod_Vol_Noir.setText(String.valueOf(optimalNoir));
+            or_Prod_Vol_Total.setText(String.valueOf(totalGrapes));
+            or_Total_Revenue.setText(String.valueOf(optimalRevenue));
+            or_Labor_Surplus.setText(String.valueOf(surLabor));
+            or_Grape_Surplus.setText(String.valueOf(surGrape));
+        }
     }
 
 
