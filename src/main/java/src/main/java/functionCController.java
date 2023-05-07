@@ -43,16 +43,19 @@ import javafx.scene.shape.Line;
 public class functionCController {
 
     @FXML
-    private TextField Bko_Noir; //integer
+    private TextField Bko_Fulfill;
 
     @FXML
-    private TextField Bko_Rose; //integer
+    private TextField Bko_Noir;
 
     @FXML
-    private TextField Cap_Grape; //integer, kg
+    private TextField Bko_Rose;
 
     @FXML
-    private TextField Cap_Labor; //integer, minutes
+    private TextField Cap_Grape;
+
+    @FXML
+    private TextField Cap_Labor;
 
     @FXML
     private Line HLine2;
@@ -67,13 +70,25 @@ public class functionCController {
     private Line HLine_1;
 
     @FXML
-    private TextField Num_Week; //integer, week
+    private TextField Num_Week;
 
     @FXML
-    private TextField Prc_Noir; //float 2dp (9999.99), $/litre
+    private TextField Opt_Noir;
 
     @FXML
-    private TextField Prc_Rose; //float 2dp (9999.99), $/litre
+    private TextField Opt_Revenue;
+
+    @FXML
+    private TextField Opt_Rose;
+
+    @FXML
+    private TextField Opt_Total;
+
+    @FXML
+    private TextField Prc_Noir;
+
+    @FXML
+    private TextField Prc_Rose;
 
     @FXML
     private Line VLine1;
@@ -151,22 +166,7 @@ public class functionCController {
     private Label opt_result_heading1;
 
     @FXML
-    private TextField Bko_Fulfill; //boolean
-
-    @FXML
-    private TextField Opt_Noir; //integer
-
-    @FXML
-    private TextField Opt_Rose; //integer
-
-    @FXML
-    private TextField Opt_Total; //integer
-
-    @FXML
-    private TextField Opt_Revenue; //integer
-
-    @FXML
-    private Spinner<String> or_scroll_text1;
+    private Spinner<?> or_scroll_text1;
 
     @FXML
     private Line vLine3;

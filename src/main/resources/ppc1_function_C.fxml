@@ -59,27 +59,29 @@
       </MenuBar>
       <AnchorPane fx:id="label_col_heading2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="519.0" prefWidth="788.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="Num_Week" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Num_Week" />
-            <Label fx:id="data_input_heading1" layoutX="143.0" layoutY="59.0" text="DATA INPUT" />
-            <Label fx:id="data_input_caption2a" layoutX="133.0" layoutY="147.0" text="Labor (minutes)" />
             <Label fx:id="form_heading1" layoutX="230.0" layoutY="8.0" text="A2.2.C Weekly Review by Revenue &amp; Backorders">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="data_input_caption1" layoutX="81.0" layoutY="98.0" prefHeight="17.0" prefWidth="145.0" text="Week of the Year (Weeks)" />
+            <Label fx:id="data_input_heading1" layoutX="143.0" layoutY="59.0" text="DATA INPUT" />
+            <Label fx:id="data_input_caption1" layoutX="52.0" layoutY="98.0" prefHeight="17.0" prefWidth="174.0" text="Week of Harvest Year (Vintage)" />
+            <TextField fx:id="Num_Week" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Num_Week" />
+            <Label fx:id="data_input_caption2" layoutX="53.0" layoutY="132.0" text="Capacity Of:" />
+            <Label fx:id="data_input_caption2a" layoutX="133.0" layoutY="147.0" text="Labor (minutes)" />
             <TextField fx:id="Cap_Labor" layoutX="222.0" layoutY="143.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Labor" />
-            <Label fx:id="data_input_caption2" layoutX="43.0" layoutY="128.0" text="Capacity Of:" />
             <Label fx:id="data_input_caption2b" layoutX="154.0" layoutY="174.0" text="Grape (Kgs)" />
             <TextField fx:id="Cap_Grape" layoutX="222.0" layoutY="170.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Grape" />
-            <Label fx:id="data_input_caption3" layoutX="42.0" layoutY="194.0" text="Price of Product:" />
+            <Label fx:id="data_input_caption3" layoutX="52.0" layoutY="201.0" text="Price of Product:" />
             <Label fx:id="data_input_caption3a" layoutX="136.0" layoutY="220.0" text="Rose (A$/Litre)" />
             <TextField fx:id="Prc_Rose" layoutX="221.0" layoutY="216.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Prc_Rose" />
             <Label fx:id="data_input_caption3b" layoutX="126.0" layoutY="248.0" text="P-Noir (A$/Litre)" />
             <TextField fx:id="Prc_Noir" layoutX="221.0" layoutY="244.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Prc_Noir" />
-            <Label fx:id="data_input_caption4" layoutX="42.0" layoutY="272.0" text="Backorder:" />
+            <Label fx:id="data_input_caption4" layoutX="52.0" layoutY="276.0" text="Backorder:" />
+            <Label fx:id="data_input_caption3a1" layoutX="144.0" layoutY="285.0" text="Rose (Litres)" />
             <TextField fx:id="Bko_Rose" layoutX="222.0" layoutY="281.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Bko_Rose" />
-            <Label fx:id="opt_result_heading1" layoutX="552.0" layoutY="59.0" text="OPTIMIZED RESULT" />
+            <Label fx:id="data_input_caption3b1" layoutX="138.0" layoutY="313.0" text="P-Noir (Litres)" />
+            <TextField fx:id="Bko_Noir" layoutX="222.0" layoutY="309.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Bko_Noir" />
             <Button fx:id="button_run1" layoutX="357.0" layoutY="138.0" mnemonicParsing="false" onAction="#toclick" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: green;" text="RUN ==&gt;" textFill="#f2e538">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -90,6 +92,9 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Label fx:id="opt_result_heading1" layoutX="552.0" layoutY="59.0" text="OPTIMIZED RESULT" />
+            <Label fx:id="opt_r_caption1" layoutX="487.0" layoutY="107.0" text="Production Volume (Litre)" />
+            <Label fx:id="opt_r_caption1a" layoutX="575.0" layoutY="142.0" text="Rose:" />
             <TextField fx:id="Opt_Rose" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="140.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
@@ -101,8 +106,6 @@
                   <Cursor fx:constant="CROSSHAIR" />
                </cursor>
             </TextField>
-            <Label fx:id="opt_r_caption1" layoutX="487.0" layoutY="107.0" text="Production Volume (Litre)" />
-            <Label fx:id="opt_r_caption1a" layoutX="575.0" layoutY="142.0" text="Rose:" />
             <Label fx:id="opt_r_caption1b" layoutX="575.0" layoutY="171.0" text="P-Noir:" />
             <TextField fx:id="Opt_Noir" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="167.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
@@ -112,6 +115,7 @@
                   <ColorAdjust />
                </effect>
             </TextField>
+            <Line fx:id="HLine4" endX="100.0" layoutX="636.0" layoutY="196.0" startX="-61.0" />
             <Label fx:id="opt_r_caption1c" layoutX="575.0" layoutY="204.0" text="Total:" />
             <TextField fx:id="Opt_Total" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="200.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
@@ -121,9 +125,7 @@
                   <ColorAdjust />
                </effect>
             </TextField>
-            <Line fx:id="HLine4" endX="100.0" layoutX="636.0" layoutY="196.0" startX="-61.0" />
             <Label fx:id="opt_r_caption2" layoutX="484.0" layoutY="246.0" text="Total Revenue (A$):" />
-            <Label fx:id="opt_r_caption3" layoutX="486.0" layoutY="273.0" text="Backorder Fulfilment" />
             <TextField fx:id="Opt_Revenue" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="241.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
@@ -132,6 +134,7 @@
                   <ColorAdjust />
                </effect>
             </TextField>
+            <Label fx:id="opt_r_caption3" layoutX="486.0" layoutY="273.0" text="Backorder Fulfilment" />
             <TextField fx:id="Bko_Fulfill" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="269.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="Yes" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
@@ -148,9 +151,6 @@
             <Line fx:id="vLine3" endX="61.0" endY="-23.5" layoutX="335.0" layoutY="108.0" startX="61.0" startY="-60.0" />
             <Spinner fx:id="or_scroll_text1" layoutX="22.0" layoutY="358.0" prefHeight="137.0" prefWidth="744.0" />
             <Label fx:id="label_sysmsg1" layoutX="22.0" layoutY="341.0" text="System Messages / Warnings / Reminders" />
-            <TextField fx:id="Bko_Noir" layoutX="222.0" layoutY="309.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Bko_Noir" />
-            <Label fx:id="data_input_caption3a1" layoutX="144.0" layoutY="285.0" text="Rose (Litres)" />
-            <Label fx:id="data_input_caption3b1" layoutX="138.0" layoutY="313.0" text="P-Noir (Litres)" />
          </children>
       </AnchorPane>
       <TextField />
