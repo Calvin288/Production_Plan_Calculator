@@ -12,31 +12,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
 /**
- * <h1>Weekly Review with Revenue & Backorder</h1>
- * <p>This is functionC of Group 7 COMP3111 Project Spring 2023</p>
- * <p>Function C, i.e. The Weekly Review with Revenue & Backorder program, implements an
+ * Function C implements an
  * application that finds the optimal combination of Rose and Pinot Noir.
  * to maxmize revenue and meet backorder given labor and grape capacity
- * constraints.</p>
- * The user has 7 inputs in the interface:
- * 1. Num_Week (integer, 23XX where 01<=XX<=15) = current week of the year
- * 2. Cap_Labor (integer, >=1) = labor capacity in minutes
- * 3. Cap_Grape (integer, >=1) = grape capacity in kg
- * 4. Prc_Rose (float 2dp (9999.99), >=1) = price of rose per litre
- * 5. Prc_Noir (float 2dp (9999.99), >=1) = price of pinot noir per litre
- * 6. Bko_Rose (integer, >=0) = rose backorder in litres
- * 7. Bko_Noir (integer, >=0) = pinot noir backorder in litres
+ * constraints.<br><br>
  *
- * The function  will output the following:
- * 1. Opt_Rose (integer) = optimal liters of rose to produce
- * 2. Opt_Noir (integer) = optimal liters of pinot noir to produce
- * 3. Opt_Total (integer) = optimal total liters to produce
- * 4. Opt_Revenue (float 2dp (9999.99)) = optimal revenue resulted from the amount produced.
- * 5. Bko_Fulfill ("Yes" or "No") = backorder fulfilled
- * Along with these, it will output warnings if:
- * 1. Insufficient production capacity to produce the optimal mix
- * 2. Insufficient labor supplied to utilize the grape resource
- * 3. Ratio of backorder volume is less than 70% of the optimal production volume
+ * The user has 7 inputs in the interface:<br>
+ * 1. Num_Week (integer) = current week of the year<br>
+ * 2. Cap_Labor (integer) = labor capacity in minutes<br>
+ * 3. Cap_Grape (integer) = grape capacity in kg<br>
+ * 4. Prc_Rose (float 2dp) = price of rose per litre<br>
+ * 5. Prc_Noir (float 2dp) = price of pinot noir per litre<br>
+ * 6. Bko_Rose (integer) = rose backorder in litres<br>
+ * 7. Bko_Noir (integer) = pinot noir backorder in litres<br><br>
+ *
+ * The function  will output the following:<br>
+ * 1. Opt_Rose (integer) = optimal liters of rose to produce<br>
+ * 2. Opt_Noir (integer) = optimal liters of pinot noir to produce<br>
+ * 3. Opt_Total (integer) = optimal total liters to produce<br>
+ * 4. Opt_Revenue (float 2dp (9999.99)) = optimal revenue resulted from the amount produced.<br>
+ * 5. Bko_Fulfill ("Yes" or "No") = backorder fulfilled<br>
+ * Along with these, it will output warnings if:<br>
+ * 1. Insufficient production capacity to produce the optimal mix<br>
+ * 2. Insufficient labor supplied to utilize the grape resource<br>
+ * 3. Ratio of backorder volume is less than 70% of the optimal production volume<br>
  * @author  Nidhi Shah
  * @version 1.0
  * @since   2023-04-19
@@ -238,7 +237,7 @@ public class functionCController {
         }
 
         //check if fields are in correct data type
-        else if (!isPositiveInteger(Bko_Noir.getText()) || !isPositiveInteger(Bko_Rose.getText()) || !isPositiveInteger(Cap_Grape.getText()) || !isPositiveInteger(Cap_Labor.getText()) || !isPositiveInteger(Num_Week.getText()) || !isPositiveFloat(Prc_Noir.getText()) || !isPositiveFloat(Prc_Rose.getText())) {
+        else if ( !isPositiveInteger(Cap_Grape.getText()) || !isPositiveInteger(Cap_Labor.getText()) || !isPositiveInteger(Num_Week.getText()) || !isPositiveFloat(Prc_Noir.getText()) || !isPositiveFloat(Prc_Rose.getText())) {
             or_scroll_text1.setPromptText("W5: Please fill the text field with the proper format");
         }
 
